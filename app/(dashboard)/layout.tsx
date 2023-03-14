@@ -13,7 +13,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <Head />
-      <body>
+      <body  cz-shortcut-listen="true">
        <QueryClientProvider client={client}>
        <Pane>
         {children}

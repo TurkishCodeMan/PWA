@@ -7,13 +7,13 @@ export const fetcher = async ({ url, method, body, json = true }: any) => {
       "Content-Type": "application/json",
     },
   });
+  const data = await res.json();
 
   if (!res.ok) {
-    throw new Error("API Error");
+    throw new Error(data.error);
   }
 
   if (json) {
-    const data = await res.json();
     return data;
   }
 };

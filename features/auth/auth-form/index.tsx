@@ -53,9 +53,14 @@ export default function AuthForm({ mode }: AuthFormType) {
   const { mutateAsync: login, isLoading: isLoadingLogin } = useLogin();
 
   async function submit(value: InputTypes) {
-    console.log(value);
     if (mode === "register") {
       await register(value);
+      router.replace("/home");
+    }
+    if (mode === "login") {
+      const res=await login(value);
+      console.log(res)
+      router.replace("/home");
     }
   }
 
@@ -84,7 +89,7 @@ export default function AuthForm({ mode }: AuthFormType) {
         onSubmit={async (values, { setSubmitting }) => {
           await submit(values);
           setSubmitting(false);
-          router.replace("/home");
+         
         }}
       >
         {({ isSubmitting, getFieldProps }) => (
@@ -134,7 +139,7 @@ export default function AuthForm({ mode }: AuthFormType) {
                 <Input type="checkbox" name="me" id="me" />
               </label>
               <div className={style["buttons"]}>
-                {isLoadingRegister ? (
+                {isLoadingLogin ? (
                   <Loader size={40} />
                 ) : (
                   <Button
@@ -148,14 +153,17 @@ export default function AuthForm({ mode }: AuthFormType) {
                 {mode == "login" ? (
                   <>
                     <p className={style["or"]}>Or</p>
-
-                    <Button
-                      intent="secondary"
-                      type="button"
-                      onClick={() => router.push("/signup")}
-                    >
-                      Signup
-                    </Button>
+                    {isLoadingRegister ? (
+                      <Loader size={40} />
+                    ) : (
+                      <Button
+                        intent="secondary"
+                        type="button"
+                        onClick={() => router.push("/signup")}
+                      >
+                        Signup
+                      </Button>
+                    )}
                   </>
                 ) : (
                   ""

@@ -13,7 +13,7 @@ export function useRegister() {
         json: false,
       }),
     {
-      onSettled: (invoice) => {
+      onSettled: () => {
         queryClient.invalidateQueries("user");
       },
     }
@@ -31,7 +31,7 @@ export function useLogin() {
         json: false,
       }),
     {
-      onSettled: (invoice) => {
+      onSettled: () => {
         queryClient.invalidateQueries("user");
       },
     }
