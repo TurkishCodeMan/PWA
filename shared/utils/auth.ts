@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { SignJWT, jwtVerify } from "jose";
-import { db } from "../../../pwa/shared/utils/db";
+import { db } from "./db";
 
 export const createJWT = (user: User) => {
   // return jwt.sign({ id: user.id }, 'cookies')
