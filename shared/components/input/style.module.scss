@@ -1,0 +1,27 @@
+.input {
+  --_btn-padding: var(--btn-padding, 1.5rem 1rem);
+  --_font_size: var(--font-size, 1.6rem);
+  --_border-color: var(--border-color, gray);
+  border: 2px solid var(--_border-color);
+  padding: var(--_btn-padding);
+  font-size: var(--_font_size);
+  border-radius: 1rem;
+  width: 100%;
+
+  &.primary {
+    --border-color: #ddd;
+  }
+  &.secondary {
+    --border-color: violet;
+  }
+
+  &.small {
+    --btn-padding: 1rem 1rem;
+  }
+  &.medium {
+    --btn-padding: 1.5rem 1rem;
+  }
+  &.large {
+    --btn-padding: 2rem 1rem;
+  }
+}

@@ -9,7 +9,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const client=new QueryClient();
 
-export default function AuthRootLayot({ children }: PropsWithChildren) {
+export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <Head />
