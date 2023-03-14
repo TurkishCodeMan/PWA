@@ -1,15 +1,15 @@
 'use client'
 
 import { PropsWithChildren } from "react";
-import Head from "../head";
-import Pwa from "../pwa";
+import Head from "@/app/head";
+import Pwa from "@/app/pwa";
 import { Pane } from "@/shared/components/pane";
 import '@/shared/style/base.scss'
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const client=new QueryClient();
 
-export default function DashboardLayout({ children }: PropsWithChildren) {
+export default function AuthRootLayot({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <Head />
