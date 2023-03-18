@@ -36,6 +36,7 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token }) => {
+        console.log(token)
         if (token?.role === "PUBLIC") {
           return true;
         }
