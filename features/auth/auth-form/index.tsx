@@ -9,7 +9,7 @@ import {AiOutlineLoading} from "react-icons/ai"
 import { Input } from "@/shared/components/input";
 import { useLogin, useRegister } from "@/shared/api/auth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import clsx from "clsx";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
@@ -68,7 +68,9 @@ export default function AuthForm({ mode }: AuthFormType) {
         email: value.email,
         password: value.password,
         callbackUrl: "/entry",
-      });
+        
+      })
+     
     }
     
   }

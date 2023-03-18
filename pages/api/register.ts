@@ -3,6 +3,8 @@ import { hashPassword } from "@/shared/utils/hash-pass";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function register(req: NextApiRequest, res: NextApiResponse) {
+ 
+ 
   if (req.method === "POST") {
     const user = await db.user.create({
       data: {
