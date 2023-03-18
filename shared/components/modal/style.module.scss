@@ -1,0 +1,46 @@
+.overlay {
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  min-height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.modal {
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  width: 80%;
+  border: none;
+  height: 75vh;
+  position: relative;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.toggle {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  border: none;
+  outline: none;
+  padding: 1.2rem 1.6rem;
+  border-radius: 1rem;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  .close {
+    transition: 0.2s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

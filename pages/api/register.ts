@@ -10,23 +10,24 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
       data: {
         email: req.body.email,
         password: await hashPassword(req.body.password),
-        firstName: req.body.firstName,
+        name: req.body.name,
         lastName: req.body.lastName,
+        image:''
       },
     });
 
-    const jwt = await createJWT(user);
+    // const jwt = await createJWT(user);
 
-    res.setHeader(
-      "Set-Cookie",
-      serialize(process.env.COOKIE_NAME as string, jwt, {
-        httpOnly: true,
-        path: "/",
-        maxAge: 60 * 60 * 24 * 7,
-      })
-    );
+    // res.setHeader(
+    //   "Set-Cookie",
+    //   serialize(process.env.COOKIE_NAME as string, jwt, {
+    //     httpOnly: true,
+    //     path: "/",
+    //     maxAge: 60 * 60 * 24 * 7,
+    //   })
+    // );
     res.status(201);
-    res.json({});
+    res.json({...user});
   } else {
     res.status(401);
     res.json({});

@@ -18,7 +18,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
       return;
     }
 
-    const isUser = await comparePasswords(req.body.password, user.password);
+    const isUser = await comparePasswords(req.body.password, user?.password as string);
 
     if (isUser) {
       const jwt = await createJWT(user);

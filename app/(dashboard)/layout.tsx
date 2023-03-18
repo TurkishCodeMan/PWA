@@ -20,6 +20,9 @@ export default function AuthRootLayot({ children }: PropsWithChildren) {
         </Pane>
        </QueryClientProvider>
       <Pwa/>
+
+      <div id="modal"></div>
+
       </body>
     </html>
   );

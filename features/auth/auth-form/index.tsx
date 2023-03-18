@@ -2,8 +2,9 @@
 
 import React from "react";
 import style from "./style.module.scss";
-import { Facebook, Instagram, Linkedin, Loader } from "react-feather";
+import {FaGoogle,FaFacebook} from "react-icons/fa"
 import { Button } from "@/shared/components/button";
+import {AiOutlineLoading} from "react-icons/ai"
 
 import { Input } from "@/shared/components/input";
 import { useLogin, useRegister } from "@/shared/api/auth";
@@ -11,6 +12,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import Link from "next/link";
+import { signIn, useSession } from "next-auth/react";
 
 const registerContent = {
   headerText: "Register With",
@@ -34,34 +36,41 @@ type AuthFormType = {
 type InputTypes = {
   email?: string;
   password?: string;
-  firstName?: string;
+  name?: string;
   lastName?: string;
 };
 
 const initial: InputTypes = {
   email: "",
   password: "",
-  firstName: "",
+  name: "",
   lastName: "",
 };
 
 export default function AuthForm({ mode }: AuthFormType) {
   const router = useRouter();
+  const { data: session, status } = useSession();
 
   const content = mode === "login" ? loginContent : registerContent;
   const { mutateAsync: register, isLoading: isLoadingRegister } = useRegister();
-  const { mutateAsync: login, isLoading: isLoadingLogin } = useLogin();
 
   async function submit(value: InputTypes) {
     if (mode === "register") {
       await register(value);
-      router.replace("/home");
+      signIn("credentials", {
+        email: value.email,
+        password: value.password,
+        callbackUrl: "/entry",
+      });
     }
     if (mode === "login") {
-      const res=await login(value);
-      console.log(res)
-      router.replace("/home");
+      signIn("credentials", {
+        email: value.email,
+        password: value.password,
+        callbackUrl: "/entry",
+      });
     }
+    
   }
 
   return (
@@ -89,21 +98,18 @@ export default function AuthForm({ mode }: AuthFormType) {
         onSubmit={async (values, { setSubmitting }) => {
           await submit(values);
           setSubmitting(false);
-         
         }}
       >
         {({ isSubmitting, getFieldProps }) => (
           <>
             <div className={style["social"]}>
               <div>
-                <Facebook size={20} />
+                <FaFacebook onClick={() => signIn("facebook")} size={20} />
               </div>
               <div>
-                <Instagram size={20} />
+                <FaGoogle onClick={() => signIn("google")} size={20} />
               </div>
-              <div>
-                <Linkedin size={20} />
-              </div>
+            
             </div>
             {mode == "register" ? <p className={style["or"]}>Or</p> : ""}
             <Form className={style["inputs"]}>
@@ -139,8 +145,8 @@ export default function AuthForm({ mode }: AuthFormType) {
                 <Input type="checkbox" name="me" id="me" />
               </label>
               <div className={style["buttons"]}>
-                {isLoadingLogin ? (
-                  <Loader size={40} />
+                {status==='loading' ? (
+                  <AiOutlineLoading size={40} />
                 ) : (
                   <Button
                     intent={mode == "login" ? "primary" : "secondary"}
@@ -154,7 +160,7 @@ export default function AuthForm({ mode }: AuthFormType) {
                   <>
                     <p className={style["or"]}>Or</p>
                     {isLoadingRegister ? (
-                      <Loader size={40} />
+                      <AiOutlineLoading size={40} />
                     ) : (
                       <Button
                         intent="secondary"

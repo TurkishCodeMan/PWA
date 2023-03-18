@@ -1,0 +1,156 @@
+.modal-wizard {
+  overflow: hidden;
+}
+
+.modal-wrapper {
+  display: flex;
+  width: 160vw;
+  height: 100%;
+  overflow: hidden;
+  transition: 0.5s;
+  position: relative;
+}
+
+.modal-wrapper.step-0 {
+  left: 0;
+}
+.modal-wrapper.step-1 {
+  left: -80vw;
+}
+.main,
+.main-2 {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  width: 80vw;
+  height: 100%;
+  padding: 0 2rem;
+  gap: 1rem;
+  position: relative;
+  left: 0;
+}
+
+.main-2 {
+  flex-direction: column;
+}
+
+.main img {
+  width: 60%;
+  object-fit: cover;
+  padding-right: 1rem;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding-left: 1rem;
+  margin-top: 4rem;
+  border-left: 1px solid #eee;
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+
+    input.type {
+      display: none;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 2rem;
+
+      label {
+        padding: 1.5rem 2rem;
+        border-radius: 0.5rem;
+        transition: 0.3s;
+      }
+    }
+
+    input:nth-child(1):checked ~ .buttons label:nth-child(1),
+    input:nth-child(2):checked ~ .buttons label:nth-child(2) {
+      background: #eee;
+    }
+    input:nth-child(1):checked ~ .form-area {
+      left: 0vw;
+    }
+    input:nth-child(2):checked ~ .form-area {
+      left: -100vw;
+    }
+    .form-area {
+      width: 200vw;
+      display: flex;
+
+      transition: 0.5s;
+      position: relative;
+      margin-top: 2rem;
+    }
+  }
+}
+
+.main-2 {
+  .main-2-content {
+    width: 100%;
+    height: 100%;
+
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 6rem;
+
+    hr {
+      height: 65vh;
+      border-left: #9394a9;
+    }
+  }
+
+  .controls {
+    margin-bottom: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: row wrap;
+
+    &>button {
+      flex:1
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .main img {
+    display: none;
+  }
+
+  .content {
+    border: none;
+
+    .tabs {
+      .form-area {
+        form {
+          input {
+            max-width: 50vw;
+          }
+        }
+      }
+    }
+  }
+
+  .tabs .buttons {
+    label {
+      padding: 1rem;
+      font-size: 1.3rem;
+    }
+  }
+}
