@@ -1,16 +1,14 @@
-import { createJWT } from "@/shared/utils/auth";
 import { db } from "@/shared/utils/db";
 import { hashPassword } from "@/shared/utils/hash-pass";
 import { NextApiRequest, NextApiResponse } from "next";
-import { serialize } from "cookie";
 
-export default async function POST(req: NextApiRequest, res: NextApiResponse) {
+export default async function register(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const user = await db.user.create({
       data: {
         email: req.body.email,
         password: await hashPassword(req.body.password),
-        name: req.body.name,
+        name: req.body.firstName,
         lastName: req.body.lastName,
         image:''
       },
