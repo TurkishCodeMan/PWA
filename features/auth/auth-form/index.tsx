@@ -75,7 +75,6 @@ export default function AuthForm({ mode }: AuthFormType) {
     }
   }
 
-  console.log(status)
 
   return (
     <div
