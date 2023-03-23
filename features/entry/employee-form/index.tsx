@@ -3,24 +3,27 @@ import { Input } from "@/shared/components/input";
 import { Form, Formik } from "formik";
 import style from "./style.module.scss";
 import React, { FormEvent } from "react";
-
+export interface EmployeeFormProps {
+  email: string;
+  password: string;
+  workHere: string;
+}
 export function EmployeeForm({
   submitCreateUser,
 }: {
-  submitCreateUser: (values: typeof employeeInitial) => void;
+  submitCreateUser: (values: EmployeeFormProps) => void;
 }) {
-  const [employeeInitial, setEmployeeInitial] = React.useState({
-    searchCompany: "",
-    email: "",
-    password: "",
-    workHere: "",
-  });
+  const [employeeInitial, setEmployeeInitial] =
+    React.useState<EmployeeFormProps>({
+      email: "",
+      password: "",
+      workHere: "",
+    });
 
   return (
     <Formik
       initialValues={{ ...employeeInitial }}
       onSubmit={async (values, { setSubmitting }) => {
-       
         submitCreateUser(values);
         setSubmitting(false);
       }}

@@ -5,10 +5,15 @@ import React from "react";
 import style from "./style.module.scss";
 import { Button } from "@/shared/components/button";
 import clsx from "clsx";
-import { CompanyForm } from "@/features/entry/company-form";
-import { EmployeeForm } from "@/features/entry/employee-form";
+import { CompanyForm, CompanyFormProps } from "@/features/entry/company-form";
+import {
+  EmployeeForm,
+  EmployeeFormProps,
+} from "@/features/entry/employee-form";
 import { Detail, Group } from "@/features/entry/detail-form";
 import { v4 as uuidv4 } from "uuid";
+import { useSaveCompany } from "@/entities/entry/model";
+import { useRouter } from "next/navigation";
 
 function plusGroup(fn: React.Dispatch<React.SetStateAction<Group[]>>) {
   fn((curr) => [...curr, { id: uuidv4(), tag: "T", name: "Test" }]);
@@ -34,20 +39,31 @@ export default function EntryPoint() {
     Group[]
   >([]);
 
+  const [employeeValues, setEmployeeValues] =
+    React.useState<EmployeeFormProps>();
+  const [companyValues, setCompanyValues] = React.useState<CompanyFormProps>();
 
-  function submitCreateUser(values: any) {
+  const { mutateAsync: saveCompany, isLoading: isLoadingSaveCompany } =
+    useSaveCompany();
+
+  const router = useRouter();
+  function submitCreateUser(values: CompanyFormProps) {
     event?.preventDefault();
-    console.log("---");
     setStep(1);
+    return setCompanyValues(values);
   }
-  function submitCreateEmployee(){
+  function submitCreateEmployee(values: EmployeeFormProps) {
     event?.preventDefault();
-    console.log("---");
+    return setEmployeeValues(values);
   }
-  function submitDetailComplete() {
-    event?.preventDefault();
-    console.log("---");
-  
+  async function submitDetailComplete() {
+    await saveCompany({
+      ...(companyValues as CompanyFormProps),
+      howManyEmployeeSize,
+      howManySubContracterSize,
+      groupsEmployees,
+      groupsSubContracters,
+    }).then(() => router.replace("/home"));
   }
 
   return (
@@ -66,7 +82,6 @@ export default function EntryPoint() {
                   id="company"
                   name="slider"
                   type="radio"
-                
                 ></input>
                 <input
                   className={style["type"]}
@@ -113,7 +128,9 @@ export default function EntryPoint() {
               />
             </div>
             <div className={style["controls"]}>
-              <Button intent="secondary" onClick={() => setStep(0)}>Previous</Button>
+              <Button intent="secondary" onClick={() => setStep(0)}>
+                Previous
+              </Button>
               <Button onClick={submitDetailComplete}>Complete</Button>
             </div>
           </div>

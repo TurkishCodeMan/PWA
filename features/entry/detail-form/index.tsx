@@ -76,6 +76,7 @@ export function Detail({
           {groups?.map((group, index) => (
             <Group
               group={group}
+              setGroups={setGroups}
               key={group.id}
               removeGroup={() => removeGroup(setGroups, group.id)}
             />

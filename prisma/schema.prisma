@@ -53,12 +53,6 @@ enum ROLES {
   PUBLIC
 }
 
-// model Role {
-//   id   String @id @default(uuid())
-//   name ROLES  @unique @default(PUBLIC)
-//   User User[]
-// }
-
 model User {
   id            String    @id @default(uuid())
   createdAt     DateTime  @default(now())
@@ -69,37 +63,56 @@ model User {
   emailVerified DateTime? @map("email_verified")
   name          String?
   lastName      String?
-  projects      Project[]
   tasks         Task[]
-  Account       Account[]
-  Session       Session[]
-  role ROLES @default(PUBLIC)
+  accounts      Account[]
+  sessions      Session[]
+  role          ROLES     @default(PUBLIC)
+
+  ownerCompanies  Company[]
+  employeeCompany Company?  @relation("CompanyEmployees", fields: [companyId], references: [id])
+  companyId       String?
 
   @@map("users")
 }
 
-model Project {
+model Company {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  name      String
 
-  ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id])
+  taskGroups TaskGroup[]
 
-  name        String
-  description String?
-  due         DateTime?
-  tasks       Task[]
-  deleted     Boolean   @default(false)
+  owner   User?   @relation(fields: [ownerId], references: [id])
+  ownerId String?
 
-  @@unique([ownerId, name])
-  @@index([ownerId, id])
+  employees User[] @relation("CompanyEmployees")
 }
 
 enum TASK_STATUS {
   NOT_STARTED
   STARTED
   COMPLETED
+}
+
+enum TASK_GROUP_TYPE {
+  EMPLOYEE_TASKGROUP
+  SUBCONTRACTER_TASKGROUP
+}
+
+model TaskGroup {
+  id    String @id @default(uuid())
+  name  String
+  tasks Task[]
+
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+  
+
+  type TASK_GROUP_TYPE @default(EMPLOYEE_TASKGROUP)
+
+  @@unique([companyId, name])
+  @@index([companyId, id])
 }
 
 model Task {
@@ -110,15 +123,14 @@ model Task {
   ownerId String
   owner   User   @relation(fields: [ownerId], references: [id])
 
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id])
-
   status      TASK_STATUS @default(NOT_STARTED)
   name        String
   description String
 
-  due     DateTime?
-  deleted Boolean   @default(false)
+  due         DateTime?
+  deleted     Boolean    @default(false)
+  taskGroup   TaskGroup? @relation(fields: [taskGroupId], references: [id])
+  taskGroupId String?
 
   @@index([ownerId])
 }

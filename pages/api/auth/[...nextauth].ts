@@ -22,13 +22,11 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             email: credentials?.email,
           },
         });
-        console.log(user);
+
         const isUser = await comparePasswords(
           credentials?.password as string,
           user?.password as string
         );
-
-        console.log(isUser, "İSUSER");
 
         if (isUser && user) {
           return user;
@@ -59,6 +57,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     },
     pages: {
       signIn: "/signin",
+      error: "/signin",
     },
 
     callbacks: {
@@ -70,7 +69,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       },
       async jwt({ token, user, account, profile, isNewUser }) {
         if (token && user) {
-          return { ...user, id: `${user.id}` };
+          return { token: token, ...user, id: `${user.id}` };
         }
 
         return token;

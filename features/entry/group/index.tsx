@@ -8,9 +8,11 @@ import { v4 as uuidv4 } from "uuid";
 export function Group({
   group,
   removeGroup,
+  setGroups
 }: {
   group: Group;
   removeGroup: (id: string) => void;
+  setGroups:React.Dispatch<React.SetStateAction<Group[]>>
 }) {
   const [group_, setGroup] = React.useState<Group>({ ...group });
   return (
@@ -33,6 +35,14 @@ export function Group({
                 tag: event.target.value.charAt(0).toUpperCase(),
                 name: event.target.value,
               }));
+            
+            }}
+            onBlur={()=>{
+              setGroups((curr)=>{
+                let newCurr=curr.filter(val=>val.id!=group_.id);
+                newCurr=[...newCurr,group_]
+                return newCurr
+              })
             }}
             contentEditable
           ></Input>

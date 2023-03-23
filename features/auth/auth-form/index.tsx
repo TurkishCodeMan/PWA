@@ -2,17 +2,18 @@
 
 import React from "react";
 import style from "./style.module.scss";
-import {FaGoogle,FaFacebook} from "react-icons/fa"
+import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { Button } from "@/shared/components/button";
-import {AiOutlineLoading} from "react-icons/ai"
+import { AiOutlineLoading } from "react-icons/ai";
 
 import { Input } from "@/shared/components/input";
-import { useLogin, useRegister } from "@/shared/api/auth";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { redirect, useRouter } from "next/navigation";
+import { useRegister } from "@/shared/api/auth";
+import { Formik, Form, ErrorMessage } from "formik";
+import {  useRouter } from "next/navigation";
 import clsx from "clsx";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
+import { useLocalStorage } from 'usehooks-ts'
 
 const registerContent = {
   headerText: "Register With",
@@ -53,6 +54,8 @@ export default function AuthForm({ mode }: AuthFormType) {
 
   const content = mode === "login" ? loginContent : registerContent;
   const { mutateAsync: register, isLoading: isLoadingRegister } = useRegister();
+  
+
 
   async function submit(value: InputTypes) {
     if (mode === "register") {
@@ -68,12 +71,11 @@ export default function AuthForm({ mode }: AuthFormType) {
         email: value.email,
         password: value.password,
         callbackUrl: "/entry",
-        
-      })
-     
+      });
     }
-    
   }
+
+  console.log(status)
 
   return (
     <div
@@ -111,7 +113,6 @@ export default function AuthForm({ mode }: AuthFormType) {
               <div>
                 <FaGoogle onClick={() => signIn("google")} size={20} />
               </div>
-            
             </div>
             {mode == "register" ? <p className={style["or"]}>Or</p> : ""}
             <Form className={style["inputs"]}>
@@ -147,8 +148,8 @@ export default function AuthForm({ mode }: AuthFormType) {
                 <Input type="checkbox" name="me" id="me" />
               </label>
               <div className={style["buttons"]}>
-                {status==='loading' ? (
-                  <AiOutlineLoading size={40} />
+                {status === "loading" ? (
+                  <AiOutlineLoading size={40} className={"loading"} />
                 ) : (
                   <Button
                     intent={mode == "login" ? "primary" : "secondary"}
@@ -162,7 +163,7 @@ export default function AuthForm({ mode }: AuthFormType) {
                   <>
                     <p className={style["or"]}>Or</p>
                     {isLoadingRegister ? (
-                      <AiOutlineLoading size={40} />
+                      <AiOutlineLoading size={40} className={"loading"} />
                     ) : (
                       <Button
                         intent="secondary"

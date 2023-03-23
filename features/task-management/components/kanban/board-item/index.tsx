@@ -48,7 +48,7 @@ export function BoardItem({ item, index }: { item: Item; index: number }) {
     return setSelectionRange([selection] as any);
   }
 
-  console.log(popoverType);
+  
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (

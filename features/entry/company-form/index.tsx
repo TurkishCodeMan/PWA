@@ -6,15 +6,19 @@ import { Form, Formik } from "formik";
 import style from "./style.module.scss";
 import React, { FormEvent } from "react";
 
+export interface CompanyFormProps {
+  companyName:string,
+
+}
+
 export function CompanyForm({
   submitCreateUser,
 }: {
-  submitCreateUser: (values:typeof companyInitial) => void;
+  submitCreateUser: (values:CompanyFormProps) => void;
 }) {
-  const [companyInitial, setCompanyInitial] = React.useState({
+  const [companyInitial, setCompanyInitial] = React.useState<CompanyFormProps>({
     companyName: "",
-    email: "",
-    password: "",
+  
   });
 
   return (
@@ -39,22 +43,7 @@ export function CompanyForm({
               {...getFieldProps("companyName")}
             />
           </label>
-          <label htmlFor="user-name2">
-            <Input
-              type="text"
-              placeholder="Email"
-              id="email"
-              {...getFieldProps("email")}
-            />
-          </label>
-          <label htmlFor="password2">
-            <Input
-              type="password"
-              placeholder="Password"
-              id="password"
-              {...getFieldProps("password")}
-            />
-          </label>
+        
 
           <Button className={style["submit"]} type="submit" intent="primary">
             Next
