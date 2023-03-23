@@ -1,5 +1,6 @@
 @use './variables';
-
+@import 'react-date-range/dist/styles.css'; // main css file
+@import 'react-date-range/dist/theme/default.css'; // theme css file
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
 
 * {
@@ -17,9 +18,14 @@
     min-height: 100vh;
     width: 100%;
     font-family: "Poppins",sans-serif;
+  
   }
   
-  
+  .icon {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
   
   /* @media (prefers-color-scheme: dark) {
     html {

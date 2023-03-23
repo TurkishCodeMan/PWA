@@ -10,7 +10,7 @@
 
   font-size: var(--_font-size);
   padding: var(--_btn-padding);
-  border-radius: 2rem;
+  border-radius: 1rem;
   font-weight: bold;
   &:hover,
   &:active {
@@ -20,6 +20,11 @@
   transition: all 0.3s ease-in-out;
   background: var(--_color-bg);
   color: var(--_color-text);
+
+  &:disabled {
+    opacity: .3;
+  }
+
 
   &.primary {
     --color: linear-gradient(to right, #00c7fc 10%, #077afb);
