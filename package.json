@@ -30,6 +30,7 @@
     "next-auth": "^4.20.1",
     "next-connect": "^0.13.0",
     "next-pwa": "^5.4.4",
+    "ramda": "^0.28.0",
     "react": "18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-date-range": "^1.4.0",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/ramda": "^0.28.23",
     "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-date-range": "^1.4.4",
     "@types/uuid": "^9.0.1",

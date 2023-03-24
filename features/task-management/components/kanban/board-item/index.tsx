@@ -19,17 +19,26 @@ import { DateRange } from "react-date-range";
 import { Popover, Transition, Menu } from "@headlessui/react";
 import { Button } from "@/shared/components/button";
 import { Draggable } from "react-beautiful-dnd";
+import { Prisma, Task } from "@prisma/client";
+import { upperFirstLetter } from "@/shared/utils/util-func";
+const taskWithUsers = Prisma.validator<Prisma.TaskArgs>()({
+  include: {
+    users: true,
+  },
+});
 
-type Item = {
-  id: string;
-  title: string;
-  users: any[];
-  startDate: Date;
-  endDate: Date;
-};
+export type TaskWithUsers = Prisma.TaskGetPayload<typeof taskWithUsers>;
 
-export function BoardItem({ item, index }: { item: Item; index: number }) {
-  const { id, title, users, startDate, endDate } = item;
+export function BoardItem({
+  item,
+  index,
+  isLoadingTaskGroup,
+}: {
+  item: TaskWithUsers;
+  index: number;
+  isLoadingTaskGroup: boolean;
+}) {
+  const { id, name, users } = item;
 
   const [popoverType, setType] = React.useState<number>(0);
 
@@ -47,8 +56,6 @@ export function BoardItem({ item, index }: { item: Item; index: number }) {
   }) {
     return setSelectionRange([selection] as any);
   }
-
-  
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -58,9 +65,14 @@ export function BoardItem({ item, index }: { item: Item; index: number }) {
           {...provided.dragHandleProps}
           className={style["popover"]}
         >
-          <li className={style["board-item"]}>
+          <li
+            className={clsx(
+              style["board-item"],
+              isLoadingTaskGroup && style["updating"]
+            )}
+          >
             <div className={style["item-header"]}>
-              <h3>{title}</h3>
+              <h3>{name}</h3>
               <div className={style["actions"]}>
                 <Popover.Button key={1} className={style["popover-button"]}>
                   <CalendarIcon
@@ -89,11 +101,13 @@ export function BoardItem({ item, index }: { item: Item; index: number }) {
               </div>
 
               <div className={style["user-detail"]}>
-                <Popover as="div" className={style['add-user']}>
-                  {users.length > 0 ? (
-                    <div className={style["avatar"]}>
-                      <p>HA</p>
-                    </div>
+                <Popover as="div" className={style["add-user"]}>
+                  {users?.length > 0 ? (
+                    users.map((user) => (
+                      <div key={user.id} className={style["avatar"]}>
+                        <p>{upperFirstLetter(user.name ?? "")}</p>
+                      </div>
+                    ))
                   ) : (
                     <div className={style["empty"]}>
                       <Popover.Button

@@ -6,72 +6,48 @@ import React from "react";
 import { BoardItem } from "./board-item";
 import { Board } from "./board";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-
-const boardData = [
-  {
-    id: "1",
-    name: "Starters",
-    items: [
-      {
-        id: "1",
-        title: "Adresse zip code",
-        users: [],
-        startDate: new Date(),
-        endDate: new Date("20/06/2023"),
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Finished",
-    items: [
-      {
-        id: "13",
-        title: "Convesation",
-        users: [],
-        startDate: new Date(),
-        endDate: new Date("20/06/2023"),
-      },
-    ],
-  },
-  {
-    id: "3",
-    name: "Updating",
-    items: [
-      {
-        id: "14",
-        title: "New Painting",
-        users: [],
-        startDate: new Date(),
-        endDate: new Date("20/06/2023"),
-      },
-    ],
-  },
-];
+import {
+  TaskGroupWithTasks,
+  useAllTaskGroups,
+  useUpdateTask,
+} from "@/entities/task/model";
 
 export function Kanban() {
-  const [board, setBoard] = React.useState(boardData);
   // SEARCH YAP DOWNSHİFT
 
-  function onDragEnd(val: DropResult) {
+  const { data, isLoading } = useAllTaskGroups();
+
+  const [board, setBoard] = React.useState<TaskGroupWithTasks[]>([]);
+
+  const { mutateAsync: updateTaskGroup, isLoading: isLoadingTaskGroup } =
+    useUpdateTask();
+
+  async function onDragEnd(val: DropResult) {
+    console.log(val);
     if (!val.destination) return;
     let newBoardData = board;
-    var dragItem =
-      newBoardData[parseInt(val.source.droppableId)]?.items[val.source.index];
+    var dragItem = board
+      .find((v) => v.id === val.source.droppableId)
+      ?.tasks.find((v) => v.id == val.draggableId);
 
-    newBoardData[parseInt(val.source.droppableId)].items.splice(
-      val.source.index,
-      1
-    );
+    newBoardData
+      .find((v) => v.id === val.source.droppableId)
+      ?.tasks.splice(val.source.index, 1);
 
-    newBoardData[parseInt(val.destination.droppableId)]?.items.splice(
-      val?.destination?.index as number,
-      0,
-      dragItem
-    );
+    newBoardData
+      .find((v) => v.id === val?.destination?.droppableId)
+      ?.tasks.splice(val?.destination?.index as number, 0, dragItem as any);
 
-    setBoard(() => [...newBoardData]);
+    await updateTaskGroup({
+      taskId: val.draggableId,
+      destinationGroupId: val.destination.droppableId,
+      sourceGroupId: val.source.droppableId,
+    }).then(() => setBoard(() => [...newBoardData]));
   }
+
+  React.useEffect(() => {
+    setBoard(data ?? []);
+  }, [isLoading]);
 
   return (
     <DragDropContext
@@ -80,18 +56,29 @@ export function Kanban() {
       onDragEnd={onDragEnd}
     >
       <div className={style["kanban"]}>
-        {board.map((board, bIndex) => (
-          <Board
-            key={board.id}
-            id={board.id}
-            index={bIndex.toString()}
-            title={board.name}
-          >
-            {board.items.map((item, index) => (
-              <BoardItem key={item.id} index={index} item={item} />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            {board.map((board, bIndex) => (
+              <Board
+                key={board.id}
+                id={board.id}
+                index={bIndex.toString()}
+                title={board.name}
+              >
+                {board?.tasks.map((item, index) => (
+                  <BoardItem
+                    key={item.id}
+                    index={index}
+                    item={item}
+                    isLoadingTaskGroup={isLoadingTaskGroup}
+                  />
+                ))}
+              </Board>
             ))}
-          </Board>
-        ))}
+          </>
+        )}
       </div>
     </DragDropContext>
   );

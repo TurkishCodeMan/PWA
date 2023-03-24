@@ -9,15 +9,18 @@ import { BsPeople } from "react-icons/bs";
 import { GiWorld } from "react-icons/gi";
 import { TbNotes } from "react-icons/tb";
 import { RxAvatar } from "react-icons/rx";
+import clsx from "clsx";
 
 export default function Header() {
+ 
   return (
     <header id={style["header"]}>
       <div className={style["logo"]}>
-        <img className={style["img"]} src="/icon-256x256.png" alt="" />
         <Menu as="div" className={style["menu"]}>
           <Menu.Button className={style["menu-button"]}>
-            Task Management
+            <img className={style["img"]} src="/icon-256x256.png" alt="" />
+            <p> Task Management</p>
+
             <FaChevronDown size={15} />
           </Menu.Button>
           <Menu.Items className={style["menu-items"]}>
@@ -28,7 +31,7 @@ export default function Header() {
                 </Link>
               )}
             </Menu.Item>
-            <Menu.Item key="/" as={Fragment}>
+            <Menu.Item key="/a" as={Fragment}>
               {({ active }) => (
                 <Link className={style["menu-item"]} href="/dashboard">
                   Dashboard
@@ -41,7 +44,10 @@ export default function Header() {
       <nav className={style["nav"]}>
         <ul className={style["nav-list"]}>
           <li className={style["nav-list-item"]}>
-            <Link href="#">
+            <Link
+              href="/home"
+              
+            >
               <TbNotes size={25} />
             </Link>
           </li>

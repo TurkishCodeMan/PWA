@@ -27,6 +27,11 @@
   transition: var(--transition-duration);
   @include mixin.box-shadow();
 
+
+  &.updating {
+    opacity: .5;
+  }
+
   .item-header {
     display: flex;
     align-items: center;
@@ -104,9 +109,12 @@
         border: 2px solid #fff;
         padding: 0.5rem;
         border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
 
         p {
           font-size: 1.2rem;
+          min-width: 2rem;
         }
       }
     }
@@ -332,6 +340,34 @@
     }
   }
 }
+
+
+@media (max-width:768px){
+  .calendar-panel {
+    .rdrCalendarWrapper{
+      font-size: .8rem !important;
+    }
+  }
+
+  .text-box-panel {
+    width: 20rem;
+    top: 3rem;
+    right:0;left:unset;
+  }
+
+  .menu-panel {
+    right: 40%;
+    top: 3rem;
+    left: unset;
+ 
+  }
+}
+
+
+
+
+
+
 
 .enter-transition {
   transition: all 0.2s ease;

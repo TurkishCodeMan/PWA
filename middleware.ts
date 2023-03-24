@@ -32,7 +32,7 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
   }
   const jwt = await getToken({ req, secret });
 
-  console.log("JSON Web Token", jwt);
+  // console.log("JSON Web Token", jwt);
 
   //Home Page Settings
   if (jwt && pathname === "/") {

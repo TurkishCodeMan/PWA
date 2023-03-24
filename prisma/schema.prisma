@@ -63,7 +63,7 @@ model User {
   emailVerified DateTime? @map("email_verified")
   name          String?
   lastName      String?
-  tasks         Task[]
+  tasks         Task[]    @relation("TaskEmployees")
   accounts      Account[]
   sessions      Session[]
   role          ROLES     @default(PUBLIC)
@@ -71,6 +71,7 @@ model User {
   ownerCompanies  Company[]
   employeeCompany Company?  @relation("CompanyEmployees", fields: [companyId], references: [id])
   companyId       String?
+  ownerTasks      Task[]    @relation("TaskOwner")
 
   @@map("users")
 }
@@ -107,7 +108,6 @@ model TaskGroup {
 
   company   Company? @relation(fields: [companyId], references: [id])
   companyId String?
-  
 
   type TASK_GROUP_TYPE @default(EMPLOYEE_TASKGROUP)
 
@@ -120,12 +120,17 @@ model Task {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  users User[] @relation("TaskEmployees")
+
   ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id])
+  owner   User   @relation("TaskOwner", fields: [ownerId], references: [id])
 
   status      TASK_STATUS @default(NOT_STARTED)
   name        String
   description String
+
+  startDate DateTime  @default(now())
+  endDate   DateTime?
 
   due         DateTime?
   deleted     Boolean    @default(false)

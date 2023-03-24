@@ -17,23 +17,25 @@ export function Board({
   index,
   title = "",
 }: PropsWithChildren<BoardTypes>) {
+  const [seeAll, setSeeAll] = React.useState(false);
+
   return (
-    <Droppable droppableId={index}>
+    <Droppable droppableId={id}>
       {(provided, snapshot) => (
         <Popover as="div" className={style["popover"]}>
           <article
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={style["board"]}
+            className={clsx(style["board"] ,seeAll && style['board-open'])}
           >
             <div className={style["board-header"]}>
               <h2>{title}</h2>
 
               <span>
-                <div className={style['plus-area']}>
+                <div className={style["plus-area"]}>
                   <PlusIcon className={clsx("icon")} />
                 </div>
-                <Popover.Button className={style['popover-button']}>
+                <Popover.Button className={style["popover-button"]}>
                   <span>
                     <EllipsisVerticalIcon className={clsx("icon")} />
                   </span>
@@ -43,21 +45,19 @@ export function Board({
               <Popover.Panel className={style["popover-panel"]}>
                 <div className={style["popover-content"]}>
                   <h2>Set default for all items</h2>
-                  <div className={style['options']}>
-                  <div className={style["selection"]}>
-                    <label htmlFor="radio">
-                      <input type="radio" name="radio" id="radio" />
-                    </label>
-                    <p>Geolocation</p>
-                   
-                  </div>
-                  <div className={style["selection"]}>
-                    <label htmlFor="radio">
-                      <input type="radio" name="radio" id="radio" />
-                    </label>
-                    <p>Auto archive</p>
-                   
-                  </div>
+                  <div className={style["options"]}>
+                    <div className={style["selection"]}>
+                      <label htmlFor="radio">
+                        <input type="radio" name="radio" id="radio" />
+                      </label>
+                      <p>Geolocation</p>
+                    </div>
+                    <div className={style["selection"]}>
+                      <label htmlFor="radio">
+                        <input type="radio" name="radio" id="radio" />
+                      </label>
+                      <p>Auto archive</p>
+                    </div>
                   </div>
                 </div>
               </Popover.Panel>
@@ -65,6 +65,13 @@ export function Board({
 
             <ul className={style["board-items"]}>{children}</ul>
             {provided.placeholder}
+            <span
+              role="button"
+              onClick={() => setSeeAll((curr) => !curr)}
+              className={clsx(style["see-all"])}
+            >
+              {seeAll ? 'Collapse' :'See All'}
+            </span>
           </article>
         </Popover>
       )}
