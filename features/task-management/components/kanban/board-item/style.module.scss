@@ -111,10 +111,14 @@
         border-radius: 50%;
         width: 3rem;
         height: 3rem;
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
         p {
           font-size: 1.2rem;
           min-width: 2rem;
+          text-align: center;
+        
         }
       }
     }

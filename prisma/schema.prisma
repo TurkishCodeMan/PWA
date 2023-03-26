@@ -69,6 +69,9 @@ model User {
   role          ROLES     @default(PUBLIC)
 
   ownerCompanies  Company[]
+
+
+
   employeeCompany Company?  @relation("CompanyEmployees", fields: [companyId], references: [id])
   companyId       String?
   ownerTasks      Task[]    @relation("TaskOwner")
@@ -84,8 +87,7 @@ model Company {
 
   taskGroups TaskGroup[]
 
-  owner   User?   @relation(fields: [ownerId], references: [id])
-  ownerId String?
+  owners User[]
 
   employees User[] @relation("CompanyEmployees")
 }

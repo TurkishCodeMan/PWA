@@ -30,6 +30,8 @@ handler.get(async (req, res) => {
       },
     });
 
+   
+
     res.status(201).json(tasks);
   } catch (error) {
     console.log(error);

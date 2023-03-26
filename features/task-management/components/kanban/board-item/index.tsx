@@ -21,6 +21,7 @@ import { Button } from "@/shared/components/button";
 import { Draggable } from "react-beautiful-dnd";
 import { Prisma, Task } from "@prisma/client";
 import { upperFirstLetter } from "@/shared/utils/util-func";
+import { useUpdateTaskDetail } from "@/entities/task/model";
 const taskWithUsers = Prisma.validator<Prisma.TaskArgs>()({
   include: {
     users: true,
@@ -28,6 +29,16 @@ const taskWithUsers = Prisma.validator<Prisma.TaskArgs>()({
 });
 
 export type TaskWithUsers = Prisma.TaskGetPayload<typeof taskWithUsers>;
+
+function calculateProgressInDays(item: TaskWithUsers) {
+  var t2 = new Date().getTime();
+  var t1 = item.endDate
+    ? new Date(item.endDate).getTime()
+    : new Date().getTime();
+  const result = Math.floor((t2 - t1) / (24 * 3600 * 1000));
+
+  return Math.abs(result) * 1;
+}
 
 export function BoardItem({
   item,
@@ -44,17 +55,21 @@ export function BoardItem({
 
   const [selectionRange, setSelectionRange] = React.useState([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: new Date(item.startDate),
+      endDate: new Date(item.endDate ?? Date.now()),
       key: "selection",
     },
   ]);
-  function calendarOnChange({
-    selection,
-  }: {
-    selection: typeof selectionRange;
-  }) {
-    return setSelectionRange([selection] as any);
+
+  const { mutateAsync: updateTask, isLoading } = useUpdateTaskDetail();
+
+  async function calendarOnChange({ selection }: { selection: any }) {
+    setSelectionRange([selection] as any);
+    await updateTask({
+      ...item,
+      startDate: selection?.startDate as Date,
+      endDate: selection?.endDate as Date,
+    });
   }
   return (
     <Draggable draggableId={id} index={index}>
@@ -97,7 +112,12 @@ export function BoardItem({
                 <UserCircleIcon className={clsx("icon")} />
               </div>
               <div className={style["progress"]}>
-                <span></span>
+                <span
+                  role="progress"
+                  style={{
+                    width: `${calculateProgressInDays(item) * 10}%`,
+                  }}
+                ></span>
               </div>
 
               <div className={style["user-detail"]}>

@@ -50,3 +50,17 @@ export function useUpdateTask() {
     }
   );
 }
+
+export function useUpdateTaskDetail() {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (data: Task) =>
+      fetcher({ url: "/api/task/task", method: "PUT", body: data }),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("task-groups");
+      },
+    }
+  );
+}

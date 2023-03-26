@@ -17,16 +17,14 @@ export function Kanban() {
 
   const { data, isLoading } = useAllTaskGroups();
 
-  const [board, setBoard] = React.useState<TaskGroupWithTasks[]>([]);
-
   const { mutateAsync: updateTaskGroup, isLoading: isLoadingTaskGroup } =
     useUpdateTask();
 
   async function onDragEnd(val: DropResult) {
-    console.log(val);
     if (!val.destination) return;
-    let newBoardData = board;
-    var dragItem = board
+
+    let newBoardData = data as TaskGroupWithTasks[];
+    var dragItem = (data as TaskGroupWithTasks[])
       .find((v) => v.id === val.source.droppableId)
       ?.tasks.find((v) => v.id == val.draggableId);
 
@@ -42,13 +40,9 @@ export function Kanban() {
       taskId: val.draggableId,
       destinationGroupId: val.destination.droppableId,
       sourceGroupId: val.source.droppableId,
-    }).then(() => setBoard(() => [...newBoardData]));
+    });
   }
-
-  React.useEffect(() => {
-    setBoard(data ?? []);
-  }, [isLoading]);
-
+  
   return (
     <DragDropContext
       onDragStart={() => {}}
@@ -60,7 +54,7 @@ export function Kanban() {
           <div>Loading...</div>
         ) : (
           <>
-            {board.map((board, bIndex) => (
+            {data?.map((board, bIndex) => (
               <Board
                 key={board.id}
                 id={board.id}
