@@ -51,6 +51,7 @@
     "@babel/preset-typescript": "^7.21.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/bcrypt": "^5.0.0",
     "@types/ramda": "^0.28.23",
     "@types/react-beautiful-dnd": "^13.1.4",
