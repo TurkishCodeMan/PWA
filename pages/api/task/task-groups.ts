@@ -15,8 +15,10 @@ handler.get(async (req, res) => {
     const tasks = await req.db.taskGroup.findMany({
       where: {
         company: {
-          owner: {
-            id: req.user.id,
+          owners: {
+            every:{
+              id: req.user.id,
+            }
           },
         },
       },
