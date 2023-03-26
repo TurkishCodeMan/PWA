@@ -51,7 +51,11 @@ handler.post(async (req, res) => {
     const company = await req.db.company.create({
       data: {
         name: companyName as string,
-        ownerId:req.user.id
+        owners:{
+         connect:{
+          id:req.user.id
+         }
+        }
       },
     });
     //Save TaskGroup
