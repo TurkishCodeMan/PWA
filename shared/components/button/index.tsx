@@ -6,7 +6,8 @@ import {
   PropsWithChildren,
 } from "react";
 import React from 'react';
- interface ButtonProps
+
+export  interface ButtonProps
   extends DetailedHTMLProps<
       ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
