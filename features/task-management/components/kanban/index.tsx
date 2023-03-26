@@ -49,7 +49,7 @@ export function Kanban() {
       onDragUpdate={() => {}}
       onDragEnd={onDragEnd}
     >
-      <div style={{'--i':12}} className={style["kanban"]}>
+      <div className={style["kanban"]}>
         {isLoading ? (
           <div>Loading...</div>
         ) : (

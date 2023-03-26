@@ -5,7 +5,7 @@ import React from "react";
 import { FaMinus } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
-export function Group({
+export function GroupComp({
   group,
   removeGroup,
   setGroups

@@ -2,7 +2,7 @@ import { FaCircle, FaMinus, FaPlus, FaPlusCircle } from "react-icons/fa";
 import style from "./style.module.scss";
 import React from "react";
 import { Input } from "@/shared/components/input";
-import { Group } from "../group";
+import { GroupComp } from "../group";
 
 export type Group = {
   id: string;
@@ -74,7 +74,7 @@ export function Detail({
         </div>
         <div className={style["group-list"]}>
           {groups?.map((group, index) => (
-            <Group
+            <GroupComp
               group={group}
               setGroups={setGroups}
               key={group.id}
