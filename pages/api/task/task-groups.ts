@@ -27,6 +27,7 @@ handler.get(async (req, res) => {
         tasks: {
           include: {
             users: true,
+            address:true
           },
         },
       },

@@ -30,9 +30,11 @@ export interface ModalProps
   extends DetailedHTMLProps<
     HTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
-  > {}
-export function Modal({ children, className }: PropsWithChildren<ModalProps>) {
-  const [modalIsOpen, setIsOpen] = React.useState(true);
+  > {
+    status?:boolean
+  }
+export function Modal({ children, className,status }: PropsWithChildren<ModalProps>) {
+  const [modalIsOpen, setIsOpen] = React.useState(status ?? true);
 
   function openModal() {
     setIsOpen(true);

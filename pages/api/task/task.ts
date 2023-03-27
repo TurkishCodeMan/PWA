@@ -10,20 +10,33 @@ const handler = nc<Request, NextApiResponse>({
 
 handler.use(middleware);
 
-
-handler.put(async (req, res) => {
+handler.post(async (req, res) => {
   try {
-    const { startDate,endDate,id } = req.body;
-   const task= await req.db.task.update({
-        where: {
-            id:id
-        },
-        data: {
-            startDate:startDate,
-            endDate:endDate
-        }
-    })
-    res.status(201).json({message:'Update Task',task:task});
+    const { address, city, zipCode,startDate,endDate,taskGroupId } = req.body;
+    console.log(req.body)
+    const addressa = await req.db.address.create({
+      data: {
+        address,
+        city,
+        zipCode,
+      },
+    });
+    const task = await req.db.task.create({
+      data: {
+        addressId: addressa.id,
+        ownerId:req.user.id,
+        startDate,
+        endDate,
+        taskGroupId
+      },
+    });
+    res
+      .status(201)
+      .json({
+        message: "Create Task With Address",
+        task: task,
+        address: addressa,
+      });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -31,4 +44,39 @@ handler.put(async (req, res) => {
   }
 });
 
+handler.put(async (req, res) => {
+  try {
+    const { startDate, endDate, id } = req.body;
+    const task = await req.db.task.update({
+      where: {
+        id: id,
+      },
+      data: {
+        startDate: startDate,
+        endDate: endDate,
+       
+      },
+    });
+    res.status(201).json({ message: "Update Task", task: task });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+    return error;
+  }
+});
+handler.delete(async (req, res) => {
+  try {
+    const {  id } = req.body;
+    const task = await req.db.task.delete({
+      where: {
+        id: id,
+      }
+    });
+    res.status(201).json({ message: "Delete Task", task: task });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+    return error;
+  }
+});
 export default handler;

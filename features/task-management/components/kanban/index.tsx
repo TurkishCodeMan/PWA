@@ -42,7 +42,6 @@ export function Kanban() {
       sourceGroupId: val.source.droppableId,
     });
   }
-  
   return (
     <DragDropContext
       onDragStart={() => {}}

@@ -62,9 +62,9 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 
     callbacks: {
       async session({ session, user }) {
-        if (user) {
-          session.user?.email;
-        }
+        // if (user) {
+        //   session.user?.email;
+        // }
         return session;
       },
       async jwt({ token, user, account, profile, isNewUser }) {

@@ -2,8 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import middleware from "@/shared/middleware/all";
 import onError from "@/shared/middleware/error";
-import { Request } from "./types";
-
+import { Request } from "../types";
 
 const handler = nc<Request, NextApiResponse>({
   onError,
@@ -12,18 +11,25 @@ const handler = nc<Request, NextApiResponse>({
 handler.use(middleware);
 
 
-
+//TODO SELECTED COMPANY FEATURE ADDED WİTH CONTEXT API
 handler.get(async (req, res) => {
   try {
-  const user=await req.db.user.findUnique({
+    const companies = await req.db.company.findMany({
     where :{
-      id:req.user.id
+        owners:{
+            every:{
+               email:req.user.email
+            }
+        },
+        
     },
     include:{
-      ownerCompanies:true
+        employees:true,
+        owners:true
     }
-  })
-  res.status(201).json(user);
+  
+    });
+    res.status(201).json(companies[0]);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

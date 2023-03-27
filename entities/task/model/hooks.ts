@@ -6,6 +6,7 @@ const taskGroupWithTasks = Prisma.validator<Prisma.TaskGroupArgs>()({
     tasks: {
       include: {
         users: true,
+        address:true
       },
     },
   },
@@ -34,6 +35,41 @@ export function useAllTaskGroups() {
   return { ...result };
 }
 
+export function useCreateTask() {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (data: {
+      address: string;
+      city: string;
+      zipCode: string;
+      taskGroupId:string,
+      startDate:Date,
+      endDate:Date
+    }) => fetcher({ url: "/api/task/task", method: "POST", body: data }),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("task-groups");
+      },
+    }
+  );
+}
+
+
+export function useDeleteTask() {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (data: {
+      id:string
+    }) => fetcher({ url: "/api/task/task", method: "DELETE", body: data }),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("task-groups");
+      },
+    }
+  );
+}
 export function useUpdateTask() {
   const queryClient = useQueryClient();
 
@@ -50,7 +86,21 @@ export function useUpdateTask() {
     }
   );
 }
+export function useTaskAddMembers() {
+  const queryClient = useQueryClient();
 
+  return useMutation(
+    (data: {
+      members:string[],
+      id:string
+    }) => fetcher({ url: "/api/task/add-member", method: "PUT", body: data }),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("task-groups");
+      },
+    }
+  );
+}
 export function useUpdateTaskDetail() {
   const queryClient = useQueryClient();
 

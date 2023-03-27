@@ -19,12 +19,18 @@ import { DateRange } from "react-date-range";
 import { Popover, Transition, Menu } from "@headlessui/react";
 import { Button } from "@/shared/components/button";
 import { Draggable } from "react-beautiful-dnd";
-import { Prisma, Task } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { upperFirstLetter } from "@/shared/utils/util-func";
-import { useUpdateTaskDetail } from "@/entities/task/model";
+import {
+  useDeleteTask,
+  useTaskAddMembers,
+  useUpdateTaskDetail,
+} from "@/entities/task/model";
+import { useMyCompany } from "@/entities/company/model";
 const taskWithUsers = Prisma.validator<Prisma.TaskArgs>()({
   include: {
     users: true,
+    address: true,
   },
 });
 
@@ -49,10 +55,12 @@ export function BoardItem({
   index: number;
   isLoadingTaskGroup: boolean;
 }) {
-  const { id, name, users } = item;
+  const { id, name, users, address } = item;
 
   const [popoverType, setType] = React.useState<number>(0);
-
+  const [selectedUserTags, setSelectedUserTags] = React.useState<string[]>([
+    ...users.map((val) => val.email),
+  ]);
   const [selectionRange, setSelectionRange] = React.useState([
     {
       startDate: new Date(item.startDate),
@@ -60,8 +68,13 @@ export function BoardItem({
       key: "selection",
     },
   ]);
+  const { data: company, isLoading: isLoadingCompany } = useMyCompany();
 
   const { mutateAsync: updateTask, isLoading } = useUpdateTaskDetail();
+  const { mutateAsync: deleteTask, isLoading: isLoadingDelete } =
+    useDeleteTask();
+  const { mutateAsync: addMembers, isLoading: isLoadingMembers } =
+    useTaskAddMembers();
 
   async function calendarOnChange({ selection }: { selection: any }) {
     setSelectionRange([selection] as any);
@@ -71,6 +84,26 @@ export function BoardItem({
       endDate: selection?.endDate as Date,
     });
   }
+  async function deleteTaskFn() {
+    await deleteTask({ id: item.id });
+  }
+
+  function selectUser(email: string) {
+    if (!selectedUserTags.includes(email)) {
+      return setSelectedUserTags((curr) => [...curr, email]);
+    }
+    return setSelectedUserTags((curr) => curr.filter((val) => val != email));
+  }
+
+  async function addTeamMember() {
+    if (selectedUserTags.length > 0) {
+       return addMembers({
+        id: item.id,
+        members: selectedUserTags,
+      })
+    }
+  }
+
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -87,7 +120,9 @@ export function BoardItem({
             )}
           >
             <div className={style["item-header"]}>
-              <h3>{name}</h3>
+              <h3>
+                {address.address} {address.zipCode}
+              </h3>
               <div className={style["actions"]}>
                 <Popover.Button key={1} className={style["popover-button"]}>
                   <CalendarIcon
@@ -122,13 +157,12 @@ export function BoardItem({
 
               <div className={style["user-detail"]}>
                 <Popover as="div" className={style["add-user"]}>
-                  {users?.length > 0 ? (
-                    users.map((user) => (
+                  <div className={style["user-area"]}>
+                    {users.map((user) => (
                       <div key={user.id} className={style["avatar"]}>
                         <p>{upperFirstLetter(user.name ?? "")}</p>
                       </div>
-                    ))
-                  ) : (
+                    ))}
                     <div className={style["empty"]}>
                       <Popover.Button
                         className={style["popover-button"]}
@@ -139,7 +173,7 @@ export function BoardItem({
                         </p>
                       </Popover.Button>
                     </div>
-                  )}
+                  </div>
 
                   {popoverType == 3 && (
                     <Transition
@@ -151,45 +185,89 @@ export function BoardItem({
                       leaveTo={style["leave-to-transition"]}
                     >
                       <Popover.Panel className={style["add-user-panel"]}>
-                        <div className={style["add-user-content"]}>
-                          <div className={style["user-list"]}>
-                            <div className={style["user"]}>
-                              <div className={style["user-header"]}>
-                                <div className={style["avatar"]}>
-                                  <p>HA</p>
+                        {({ close }) => (
+                          <div className={style["add-user-content"]}>
+                            <div className={style["user-list"]}>
+                              {company?.employees.map((user, index) => (
+                                <div
+                                  key={user.id}
+                                  onClick={() => selectUser(user.email)}
+                                  className={clsx(
+                                    style["user"],
+
+                                    selectedUserTags.includes(user.email)
+                                      ? style["selected"]
+                                      : ""
+                                  )}
+                                >
+                                  <div className={style["user-header"]}>
+                                    <div className={style["avatar"]}>
+                                      <p>
+                                        {upperFirstLetter(user.name as string)}
+                                      </p>
+                                    </div>
+                                    <p>
+                                      {user.name} {user.lastName as string}
+                                    </p>
+                                  </div>
+                                  <XMarkIcon className="icon" />
                                 </div>
-                                <p>Erdem Demir</p>
-                              </div>
-                              <XMarkIcon className="icon" />
+                              ))}
                             </div>
-                          </div>
 
-                          <div className={style["search-content"]}>
-                            <div className={style["search-bar"]}>
-                              <input type="search" name="search" id="search" />
-                              <span>
-                                <MagnifyingGlassIcon
-                                  className={clsx("icon", style["search-icon"])}
+                            <div className={style["search-content"]}>
+                              <div className={style["search-bar"]}>
+                                <input
+                                  type="search"
+                                  name="search"
+                                  id="search"
                                 />
-                              </span>
-                            </div>
-                            <div className={style["add-user"]}>
-                              <UserPlusIcon
-                                className={clsx("icon", style["user-add-icon"])}
-                              />
-                            </div>
-                          </div>
-
-                          <div className={style["finish-team"]}>
-                            <h3>Finish Team</h3>
-                            <div className={style["user-large"]}>
-                              <div className={style["avatar"]}>
-                                <p>HA</p>
+                                <span>
+                                  <MagnifyingGlassIcon
+                                    className={clsx(
+                                      "icon",
+                                      style["search-icon"]
+                                    )}
+                                  />
+                                </span>
                               </div>
-                              <p>Huseyin Altikulac</p>
+                              <div className={style["add-user"]}>
+                                <UserPlusIcon
+                                  className={clsx(
+                                    "icon",
+                                    style["user-add-icon"]
+                                  )}
+                                />
+                              </div>
                             </div>
+
+                            <div className={style["finish-team"]}>
+                              <h3>Finish Team</h3>
+                              {item.users.map((user, index) => (
+                                <div key={user.id} className={style["user-large"]}>
+                                  <div className={style["avatar"]}>
+                                    <p>
+                                      {upperFirstLetter(user.name as string)}
+                                    </p>
+                                  </div>
+                                  <p>{user.name as string}</p>
+                                </div>
+                              ))}
+                            </div>
+
+                            <Button
+                              onClick={async () => {
+                                await addTeamMember();
+                                close()
+                                setSelectedUserTags([])
+                              }}
+                              disabled={isLoadingMembers}
+                              className={style["save-btn"]}
+                            >
+                              Save
+                            </Button>
                           </div>
-                        </div>
+                        )}
                       </Popover.Panel>
                     </Transition>
                   )}
@@ -199,12 +277,12 @@ export function BoardItem({
           </li>
           {popoverType == 0 && (
             <Transition
-              enter={style["enter-transition"]}
-              enterFrom={style["enter-from-transition"]}
-              enterTo={style["enter-to-transition"]}
-              leave={style["leave-transition"]}
-              leaveFrom={style["leave-from-transition"]}
-              leaveTo={style["leave-to-transition"]}
+              enter={"enter-transition"}
+              enterFrom={"enter-from-transition"}
+              enterTo={"enter-to-transition"}
+              leave={"leave-transition"}
+              leaveFrom={"leave-from-transition"}
+              leaveTo={"leave-to-transition"}
             >
               <Popover.Panel className={style["calendar-panel"]}>
                 <div className={style["calendar"]}>
@@ -220,12 +298,12 @@ export function BoardItem({
           )}
           {popoverType == 1 && (
             <Transition
-              enter={style["enter-transition"]}
-              enterFrom={style["enter-from-transition"]}
-              enterTo={style["enter-to-transition"]}
-              leave={style["leave-transition"]}
-              leaveFrom={style["leave-from-transition"]}
-              leaveTo={style["leave-to-transition"]}
+              enter={"enter-transition"}
+              enterFrom={"enter-from-transition"}
+              enterTo={"enter-to-transition"}
+              leave={"leave-transition"}
+              leaveFrom={"leave-from-transition"}
+              leaveTo={"leave-to-transition"}
             >
               <Popover.Panel className={style["text-box-panel"]}>
                 <div className={style["text-box-content"]}>
@@ -246,12 +324,12 @@ export function BoardItem({
 
           {popoverType == 2 && (
             <Transition
-              enter={style["enter-transition"]}
-              enterFrom={style["enter-from-transition"]}
-              enterTo={style["enter-to-transition"]}
-              leave={style["leave-transition"]}
-              leaveFrom={style["leave-from-transition"]}
-              leaveTo={style["leave-to-transition"]}
+              enter={"enter-transition"}
+              enterFrom={"enter-from-transition"}
+              enterTo={"enter-to-transition"}
+              leave={"leave-transition"}
+              leaveFrom={"leave-from-transition"}
+              leaveTo={"leave-to-transition"}
             >
               <Popover.Panel className={style["menu-panel"]}>
                 <div className={style["menu-content"]}>
@@ -283,27 +361,12 @@ export function BoardItem({
                         </Menu.Items>
                       </Menu>
                     </li>
-                    <li>
+                    <li onClick={deleteTaskFn}>
                       <MinusCircleIcon className={clsx("icon")} />
                       Delete
                     </li>
                   </ul>
                 </div>
-              </Popover.Panel>
-            </Transition>
-          )}
-
-          {popoverType == 3 && (
-            <Transition
-              enter={style["enter-transition"]}
-              enterFrom={style["enter-from-transition"]}
-              enterTo={style["enter-to-transition"]}
-              leave={style["leave-transition"]}
-              leaveFrom={style["leave-from-transition"]}
-              leaveTo={style["leave-to-transition"]}
-            >
-              <Popover.Panel className={style["user-panel"]}>
-                <div className={style["user-content"]}>sdfsdfsdfsd</div>
               </Popover.Panel>
             </Transition>
           )}
