@@ -1,7 +1,7 @@
 @use "@/shared/style/mixins" as mixin;
 
 .board {
-  background: #e9ecef 0% 0% no-repeat padding-box;
+  background:var(--board-bg) 0% 0% no-repeat padding-box;
   border-radius: 0.5rem;
   padding: 1.5rem;
   display: flex;
@@ -37,7 +37,7 @@
       align-items: center;
       justify-content: flex-end;
       padding: 0.5rem 2rem;
-      background: #fff;
+      background: var(--white);
       cursor: pointer;
 
       .plus-icon {
@@ -109,7 +109,7 @@
     right: 0;
     text-align: end;
     bottom: 0rem;
-    color: #2474ff;
+    color: var(--dark-blue);
     font-size: 1.3rem;
     visibility: hidden;
     font-weight: 600;
@@ -136,9 +136,8 @@
   margin: 0 auto;
   left: 50%;
   transform: translateX(-50%) !important;
-  background: #fff;
+  background: var(--white);
   border-radius: 1rem;
-  
 }
 
 .dialog-panel {
@@ -182,26 +181,24 @@
           outline: none;
           max-width: 79%;
           border-radius: 0.5rem;
-          background: #f3f5fa;
-          border: 1px solid #E0E0E0;
+          background: var(--input-bg);
+          border: 1px solid var(--input-border);
 
-          &::placeholder{
-            color: #989393;;
+          &::placeholder {
+            color: var(--input-placeholder);
           }
         }
 
         .date-select-container {
-     
           display: flex;
-         
+
           flex-flow: row;
 
-          label, label> *::placeholder {
-            color: #989393;;
+          label,
+          label > *::placeholder {
+            color: var(--input-placeholder);
           }
         }
-
-      
       }
 
       .geolocation {
@@ -210,27 +207,27 @@
         align-items: center;
         margin-bottom: 2rem;
 
-         &>p{
+        & > p {
           white-space: nowrap;
-          color: #989393;
+          color: var(--input-placeholder);
           font-size: 1.4rem;
-         }
+        }
 
-         .work-time {
+        .work-time {
           display: flex;
           justify-content: space-between;
           gap: 2rem;
 
-          p{
-            color: #989393;
+          p {
+            color: var(--input-placeholder);
           }
           div {
-            background: #F3F5FA;
+            background: var(--input-bg);
             padding: 1rem;
-            border: 1px solid #E0E0E0;
-            border-radius: .5rem;
+            border: 1px solid var(--input-border);
+            border-radius: 0.5rem;
           }
-         }
+        }
       }
     }
   }
@@ -261,19 +258,14 @@
     .see-all {
       visibility: visible;
     }
-   
   }
-
 
   .panel-container {
     top: 5%;
   }
   .dialog-panel {
-
     .modal-detail {
-    
       .formik-panel {
-  
         .task-form {
           .date-select-container {
             flex-flow: column;
@@ -281,8 +273,7 @@
         }
       }
       .geolocation {
-        align-items: center; 
-      
+        align-items: center;
       }
     }
   }

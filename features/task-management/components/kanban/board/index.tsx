@@ -194,6 +194,8 @@ export function Board({
                                   >
                                     Start Date
                                     <DatePicker
+                                     withPortal
+                                     portalId="modal"
                                       selected={startDate}
                                       onChange={(date) =>
                                         setStartDate(date as Date)
@@ -210,6 +212,8 @@ export function Board({
                                     End Date
                                     <DatePicker
                                       selected={endDate}
+                                      withPortal
+                                      portalId="modal"
                                       onChange={(date) =>
                                         setEndDate(date as Date)
                                       }
