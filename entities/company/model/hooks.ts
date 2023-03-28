@@ -6,6 +6,7 @@ const companyWithUsers = Prisma.validator<Prisma.CompanyArgs>()({
   include: {
     employees:true,
     owners:true,
+      
     
   },
 });

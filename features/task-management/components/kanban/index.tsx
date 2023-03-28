@@ -65,6 +65,7 @@ export function Kanban() {
                     key={item.id}
                     index={index}
                     item={item}
+                    boards={data?.map(val=>({id:val.id,name:val.name}))}
                     isLoadingTaskGroup={isLoadingTaskGroup}
                   />
                 ))}

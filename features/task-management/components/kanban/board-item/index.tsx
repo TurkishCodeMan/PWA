@@ -24,6 +24,7 @@ import { upperFirstLetter } from "@/shared/utils/util-func";
 import {
   useDeleteTask,
   useTaskAddMembers,
+  useUpdateTask,
   useUpdateTaskDetail,
 } from "@/entities/task/model";
 import { useMyCompany } from "@/entities/company/model";
@@ -50,10 +51,12 @@ export function BoardItem({
   item,
   index,
   isLoadingTaskGroup,
+  boards,
 }: {
   item: TaskWithUsers;
   index: number;
   isLoadingTaskGroup: boolean;
+  boards: { id: string; name: string }[];
 }) {
   const { id, name, users, address } = item;
 
@@ -69,8 +72,9 @@ export function BoardItem({
     },
   ]);
   const { data: company, isLoading: isLoadingCompany } = useMyCompany();
-
   const { mutateAsync: updateTask, isLoading } = useUpdateTaskDetail();
+  const { mutateAsync: updateTaskGroup, isLoading: isLoadingTask } =
+    useUpdateTask();
   const { mutateAsync: deleteTask, isLoading: isLoadingDelete } =
     useDeleteTask();
   const { mutateAsync: addMembers, isLoading: isLoadingMembers } =
@@ -87,6 +91,13 @@ export function BoardItem({
   async function deleteTaskFn() {
     await deleteTask({ id: item.id });
   }
+  async function updateMove(destId: string) {
+    await updateTaskGroup({
+      taskId: id,
+      destinationGroupId: destId,
+      sourceGroupId: "",
+    });
+  }
 
   function selectUser(email: string) {
     if (!selectedUserTags.includes(email)) {
@@ -97,10 +108,10 @@ export function BoardItem({
 
   async function addTeamMember() {
     if (selectedUserTags.length > 0) {
-       return addMembers({
+      return addMembers({
         id: item.id,
         members: selectedUserTags,
-      })
+      });
     }
   }
 
@@ -116,7 +127,7 @@ export function BoardItem({
           <li
             className={clsx(
               style["board-item"],
-              isLoadingTaskGroup && style["updating"]
+              (isLoadingTaskGroup || isLoadingTask) && style["updating"]
             )}
           >
             <div className={style["item-header"]}>
@@ -136,6 +147,7 @@ export function BoardItem({
                   />
 
                   <EllipsisVerticalIcon
+                    data-testid="three-dot"
                     onClick={() => setType(2)}
                     className={clsx("icon")}
                   />
@@ -244,7 +256,10 @@ export function BoardItem({
                             <div className={style["finish-team"]}>
                               <h3>Finish Team</h3>
                               {item.users.map((user, index) => (
-                                <div key={user.id} className={style["user-large"]}>
+                                <div
+                                  key={user.id}
+                                  className={style["user-large"]}
+                                >
                                   <div className={style["avatar"]}>
                                     <p>
                                       {upperFirstLetter(user.name as string)}
@@ -258,8 +273,8 @@ export function BoardItem({
                             <Button
                               onClick={async () => {
                                 await addTeamMember();
-                                close()
-                                setSelectedUserTags([])
+                                close();
+                                setSelectedUserTags([]);
                               }}
                               disabled={isLoadingMembers}
                               className={style["save-btn"]}
@@ -332,7 +347,8 @@ export function BoardItem({
               leaveTo={"leave-to-transition"}
             >
               <Popover.Panel className={style["menu-panel"]}>
-                <div className={style["menu-content"]}>
+                {({close})=>(
+                  <div className={style["menu-content"]}>
                   <ul>
                     <li>
                       <ArrowTopRightOnSquareIcon className={clsx("icon")} />
@@ -349,15 +365,21 @@ export function BoardItem({
                           Move to
                         </Menu.Button>
                         <Menu.Items className={style["menu-items"]}>
-                          <Menu.Item as="div" className={style["menu-item"]}>
-                            {({ active }) => <div>Starters</div>}
-                          </Menu.Item>
-                          <Menu.Item as="div" className={style["menu-item"]}>
-                            {({ active }) => <div>Finish</div>}
-                          </Menu.Item>
-                          <Menu.Item as="div" className={style["menu-item"]}>
-                            {({ active }) => <div>Outdoors</div>}
-                          </Menu.Item>
+                          {boards
+                            .filter((val) => val.id != item.taskGroupId)
+                            .map((val) => (
+                              <Menu.Item
+                                key={val.id}
+                                onClick={async ()=>{
+                                    await updateMove(val.id)
+                                    close();
+                                }}
+                                as="div"
+                                className={style["menu-item"]}
+                              >
+                                {({ active }) => <div>{val.name}</div>}
+                              </Menu.Item>
+                            ))}
                         </Menu.Items>
                       </Menu>
                     </li>
@@ -367,6 +389,7 @@ export function BoardItem({
                     </li>
                   </ul>
                 </div>
+                )}
               </Popover.Panel>
             </Transition>
           )}
