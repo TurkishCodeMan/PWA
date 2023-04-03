@@ -16,7 +16,6 @@ const verifyJWT = async (jwt: string) => {
   return payload;
 };
 
-
 export default async function middleware(req: NextRequest, res: NextResponse) {
   const { pathname } = req.nextUrl;
 
@@ -31,9 +30,7 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     return NextResponse.next();
   }
   const jwt = await getToken({ req, secret });
-
   // console.log("JSON Web Token", jwt);
-
   //Home Page Settings
   if (jwt && pathname === "/") {
     req.nextUrl.pathname = "/home";
@@ -41,12 +38,11 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
   }
 
   //After Save Settings
-  if (jwt && jwt.role !== "PUBLIC" && pathname != "/home") {
+  if (jwt && jwt?.role != "PUBLIC" && pathname == "/entry") {
     req.nextUrl.pathname = "/home";
     return NextResponse.redirect(req.nextUrl);
   }
 
-  
   if (!jwt) {
     req.nextUrl.pathname = "/signin";
     return NextResponse.redirect(req.nextUrl);
