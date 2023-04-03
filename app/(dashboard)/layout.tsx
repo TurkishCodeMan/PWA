@@ -14,9 +14,14 @@ export default function AuthRootLayot({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <Head />
+     
       <body cz-shortcut-listen="true">
         <SessionProvider>
-        <QueryClientProvider client={client}>{children}</QueryClientProvider>
+          <QueryClientProvider client={client}>
+     
+            {children}
+         
+            </QueryClientProvider>
         </SessionProvider>
         <Pwa />
 

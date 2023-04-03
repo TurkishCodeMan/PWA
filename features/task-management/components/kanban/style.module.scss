@@ -5,8 +5,19 @@
 
   gap: 4.4rem;
   border-radius: .5rem;
+
+
+  .all-columns {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2rem;
+
+   
+  }
  
 }
+
+
 @media (max-width:768px){
  .kanban {
   padding: 3rem;

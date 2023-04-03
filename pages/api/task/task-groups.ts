@@ -3,6 +3,7 @@ import nc from "next-connect";
 import middleware from "@/shared/middleware/all";
 import onError from "@/shared/middleware/error";
 import { Request } from "../types";
+import { Task, TaskGroup } from "@prisma/client";
 
 const handler = nc<Request, NextApiResponse>({
   onError,
@@ -10,9 +11,16 @@ const handler = nc<Request, NextApiResponse>({
 
 handler.use(middleware);
 
+function sortingByOrder(arr:any,v:any){
+ return [...arr.filter((n:any)=>n.order<v.order),v,...arr.filter((n:any)=>n.order>v.order)]
+}
+
 handler.get(async (req, res) => {
   try {
     const tasks = await req.db.taskGroup.findMany({
+      orderBy:{
+        order:'asc'
+      },
       where: {
         company: {
           owners: {
@@ -22,14 +30,17 @@ handler.get(async (req, res) => {
           },
         },
       },
+      
       include: {
         company: true,
         tasks: {
           include: {
             users: true,
-            address:true
+            address:true,
+            owner:true
           },
         },
+        
       },
     });
 

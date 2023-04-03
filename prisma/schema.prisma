@@ -70,9 +70,9 @@ model User {
 
   ownerCompanies Company[]
 
-  employeeCompany Company? @relation("CompanyEmployees", fields: [employeeCompanyId], references: [id])
-  employeeCompanyId       String?
-  ownerTasks      Task[]   @relation("TaskOwner")
+  employeeCompany   Company? @relation("CompanyEmployees", fields: [employeeCompanyId], references: [id])
+  employeeCompanyId String?
+  ownerTasks        Task[]   @relation("TaskOwner")
 
   @@map("users")
 }
@@ -106,6 +106,8 @@ model TaskGroup {
   name  String
   tasks Task[]
 
+  order Int? @default(0)
+
   company   Company? @relation(fields: [companyId], references: [id])
   companyId String?
 
@@ -113,6 +115,8 @@ model TaskGroup {
 
   @@unique([companyId, name])
   @@index([companyId, id])
+
+
 }
 
 model Task {
@@ -132,8 +136,8 @@ model Task {
   startDate DateTime  @default(now())
   endDate   DateTime?
 
-  address   Address @relation(fields: [addressId], references: [id])
-  addressId String
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?
 
   due         DateTime?
   deleted     Boolean    @default(false)

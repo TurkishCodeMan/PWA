@@ -48,6 +48,7 @@ test("board item move to test", async () => {
                   key={item.id}
                   item={item as TaskWithUsers}
                   index={index}
+                  taskGroupId="2"
                   boards={[
                     { id: "1", name: "A" },
                     { id: "2", name: "B" },

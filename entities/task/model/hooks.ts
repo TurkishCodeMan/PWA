@@ -6,7 +6,8 @@ const taskGroupWithTasks = Prisma.validator<Prisma.TaskGroupArgs>()({
     tasks: {
       include: {
         users: true,
-        address:true
+        address:true,
+        owner:true,
       },
     },
   },

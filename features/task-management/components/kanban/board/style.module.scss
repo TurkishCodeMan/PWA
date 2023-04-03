@@ -11,6 +11,10 @@
   min-height: 50vh;
   width: 26rem;
 
+  &.loading {
+    opacity: .5;
+  }
+
   // &.board-open {
   //   height: 60vh;
   // }

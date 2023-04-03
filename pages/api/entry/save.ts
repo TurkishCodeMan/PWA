@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import middleware from "@/shared/middleware/all";
 import onError from "@/shared/middleware/error";
-import { Company, PrismaClient } from "@prisma/client";
+import { Company, PrismaClient, TaskGroup } from "@prisma/client";
 import { Request } from "../types";
-
+const prismaClient = new PrismaClient();
 const handler = nc<Request, NextApiResponse>({
   onError,
 });
@@ -46,16 +46,17 @@ handler.post(async (req, res) => {
     groupsSubContracters,
   } = req.body;
   console.log(req.user);
+
   try {
     //Save company
     const company = await req.db.company.create({
       data: {
         name: companyName as string,
-        owners:{
-         connect:{
-          id:req.user.id
-         }
-        }
+        owners: {
+          connect: {
+            id: req.user.id,
+          },
+        },
       },
     });
     //Save TaskGroup
@@ -74,6 +75,7 @@ handler.post(async (req, res) => {
         saveTaskGroup({
           db: req.db,
           group: val,
+
           taskType: "subcontracters",
           company,
         })
