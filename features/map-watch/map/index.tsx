@@ -49,7 +49,7 @@ function MyTask() {
 
   React.useEffect(() => {
     if (geoData && map) {
-      map.setView({ lat: geoData.lat, lng: geoData.lng }, 7);
+      map.setView({ lat: geoData.lat, lng: geoData.lng }, 5);
     }
   }, [map, geoData]);
 
@@ -60,7 +60,7 @@ function MyUserMarker() {
 
   React.useEffect(() => {
     if (geoData && map) {
-      map.setView({ lat: geoData.lat, lng: geoData.lng }, 7);
+      map.setView({ lat: geoData.lat, lng: geoData.lng }, 5);
     }
   }, [map, geoData]);
 
@@ -85,7 +85,7 @@ function MyOtherUsers() {
 
   React.useEffect(() => {
     if (geoData && map) {
-      map.setView({ lat: geoData.lat, lng: geoData.lng }, 7);
+      map.setView({ lat: geoData.lat, lng: geoData.lng }, 5);
     }
   }, [map, geoData]);
 
