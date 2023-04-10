@@ -81,7 +81,7 @@ function MyOtherUsers() {
     return () => {
       socket.off("send");
     };
-  }, []);
+  }, [socket,geoData]);
 
   React.useEffect(() => {
     if (geoData && map) {
