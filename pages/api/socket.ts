@@ -23,7 +23,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 async function watchSocket(socket: any) {
   socket.on("coordinates", (coordinates: any) => {
     console.log(coordinates, "------");
-    socket.emit('send',coordinates)
+    socket.broadcast.emit('send',coordinates)
 
   });
 }
