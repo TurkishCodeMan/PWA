@@ -1,0 +1,87 @@
+@import "react-date-range/dist/styles.css";
+@import "react-date-range/dist/theme/default.css";
+@import "react-datepicker/dist/react-datepicker.css";
+@import "https://unpkg.com/leaflet@1.6.0/dist/leaflet.css";
+@import "leaflet/dist/leaflet.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap");
+:root {
+  --white:#fff;
+  --transition-duration:.2s;
+  --board-bg:#e9ecef;
+  --dark-blue:#2474ff;
+  --input-bg:#f3f5fa;
+  --input-border:#e0e0e0;
+  --input-placeholder:#989393;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 1.4rem;
+  }
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.loading {
+  animation: loading-anime 0.8s linear both infinite;
+}
+
+.enter-transition {
+  transition: all 0.2s ease;
+}
+
+.enter-from-transition {
+  opacity: 0;
+}
+
+.enter-to-transition {
+  opacity: 1;
+  transform: none;
+}
+
+.leave-transition {
+  transition: all 0.2s ease;
+}
+
+.leave-from-transition {
+  opacity: 1;
+  transform: none;
+}
+
+.leave-to-transition {
+  opacity: 0;
+}
+
+@keyframes loading-anime {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+  } *//*# sourceMappingURL=base.css.map */

@@ -3,6 +3,7 @@ import nc from "next-connect";
 import middleware from "@/shared/middleware/all";
 import onError from "@/shared/middleware/error";
 import { Request } from "../types";
+import { addressToCoordinates } from "@/shared/utils/adress-to-coord";
 
 const handler = nc<Request, NextApiResponse>({
   onError,
@@ -13,7 +14,8 @@ handler.use(middleware);
 handler.put(async (req, res) => {
   try {
     const { id, taskId, taskGroupId, address, city, zipCode } = req.body;
-    console.log(id, "IDD");
+    const coords = await addressToCoordinates(address);
+
     await req.db.address.update({
       where: {
         id,
@@ -24,6 +26,16 @@ handler.put(async (req, res) => {
         zipCode,
       },
     });
+
+    await req.db.task.update({
+      where:{
+        id:taskId,
+      },
+      data:{
+        coords:JSON.stringify(coords)
+      }
+    })
+
     res.status(201).json({ message: "Address Update" });
   } catch (error) {
     console.log(error);

@@ -36,6 +36,25 @@ export function useAllTaskGroups() {
   return { ...result };
 }
 
+export function useGetTaskById(id:string) {
+  const queryClient = useQueryClient();
+
+  const result = useQuery<Task>({
+    queryKey: [`task-${id}`],
+    enabled:!!id,
+    queryFn: () => {
+      return fetcher({ url: `/api/task/${id}`, method: "GET" }).then(
+        (data) => data
+      );
+    },
+    onSuccess(result) {
+      return result;
+    },
+    // keepPreviousData: true,
+  });
+
+  return { ...result };
+}
 export function useCreateTask() {
   const queryClient = useQueryClient();
 

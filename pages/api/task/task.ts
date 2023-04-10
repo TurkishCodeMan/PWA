@@ -12,8 +12,9 @@ handler.use(middleware);
 
 handler.post(async (req, res) => {
   try {
-    const { address, city, zipCode,startDate,endDate,taskGroupId } = req.body;
-    console.log(req.body)
+    const { address, city, zipCode, startDate, endDate, taskGroupId } =
+      req.body;
+
     const addressa = await req.db.address.create({
       data: {
         address,
@@ -24,19 +25,17 @@ handler.post(async (req, res) => {
     const task = await req.db.task.create({
       data: {
         addressId: addressa.id,
-        ownerId:req.user.id,
+        ownerId: req.user.id,
         startDate,
         endDate,
-        taskGroupId
+        taskGroupId,
       },
     });
-    res
-      .status(201)
-      .json({
-        message: "Create Task With Address",
-        task: task,
-        address: addressa,
-      });
+    res.status(201).json({
+      message: "Create Task With Address",
+      task: task,
+      address: addressa,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -54,7 +53,6 @@ handler.put(async (req, res) => {
       data: {
         startDate: startDate,
         endDate: endDate,
-       
       },
     });
     res.status(201).json({ message: "Update Task", task: task });
@@ -66,11 +64,11 @@ handler.put(async (req, res) => {
 });
 handler.delete(async (req, res) => {
   try {
-    const {  id } = req.body;
+    const { id } = req.body;
     const task = await req.db.task.delete({
       where: {
         id: id,
-      }
+      },
     });
     res.status(201).json({ message: "Delete Task", task: task });
   } catch (error) {

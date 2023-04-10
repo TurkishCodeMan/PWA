@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
-import { getToken } from "next-auth/jwt";
+import { JWT, getToken } from "next-auth/jwt";
 
 const secret = process.env.JWT_SECRET;
 const PUBLIC_FILE = /\.(.*)$/;
@@ -15,7 +15,12 @@ const verifyJWT = async (jwt: string) => {
 
   return payload;
 };
-
+function isEmployer(jwt:JWT){
+  return jwt && jwt.role==='EMPLOYER';
+}
+function isEmployees(jwt:JWT){
+  return jwt && jwt.role==='EMPLOYEES';
+}
 export default async function middleware(req: NextRequest, res: NextResponse) {
   const { pathname } = req.nextUrl;
 
@@ -30,9 +35,9 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     return NextResponse.next();
   }
   const jwt = await getToken({ req, secret });
-  // console.log("JSON Web Token", jwt);
+  //  console.log("JSON Web Token", jwt);
   //Home Page Settings
-  if (jwt && pathname === "/") {
+  if (isEmployer(jwt as JWT) && pathname === "/") {
     req.nextUrl.pathname = "/home";
     return NextResponse.redirect(req.nextUrl);
   }

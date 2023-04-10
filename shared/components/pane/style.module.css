@@ -1,0 +1,8 @@
+.pane {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}/*# sourceMappingURL=style.module.css.map */

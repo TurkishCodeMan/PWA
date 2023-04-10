@@ -132,6 +132,7 @@ model Task {
   status      TASK_STATUS @default(NOT_STARTED)
   name        String?
   description String?
+  coords String?
 
   startDate DateTime  @default(now())
   endDate   DateTime?

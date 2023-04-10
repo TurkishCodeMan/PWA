@@ -1,0 +1,148 @@
+.signin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--white);
+  box-shadow: 0px 1px 10px 0.5px rgba(0, 0, 0, 0.1);
+}
+.signin::before {
+  content: "";
+  width: 100%;
+  height: 50%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  position: absolute;
+  filter: blur(1px);
+  box-shadow: 0px 1px 10px 5px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(40px) saturate(20px);
+          backdrop-filter: blur(40px) saturate(20px);
+}
+.signin.register::before {
+  background: url("../../../shared/assets/img/curved0.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.signin.login::before {
+  background: url("../../../shared/assets/img/curved9.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.signin h2 {
+  font-size: 2.3rem;
+  margin: 1rem 0;
+  font-weight: 500;
+}
+.signin .social {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin: 1rem 0;
+}
+.signin .social > div {
+  box-shadow: 0px 1px 10px 0.5px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.signin .social > div:hover {
+  transform: scale(1.1);
+}
+.signin .inputs {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.signin .inputs input[type=checkbox] {
+  display: none;
+}
+.signin .inputs label {
+  background: #eee;
+  width: 5rem;
+  height: 2.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  transition: 0.4s;
+}
+.signin .inputs label::before {
+  content: attr(data-content);
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 25rem;
+  margin-left: 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.signin .inputs label::after {
+  content: "";
+  position: absolute;
+  background: var(--white);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  transition: 0.3s;
+}
+:has(input[type=checkbox]:checked) .signin .inputs label::after {
+  transform: translateX(140%) translateY(-50%);
+}
+:has(input[type=checkbox]:checked) .signin .inputs label {
+  background: #444b75;
+}
+.signin .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+}
+.signin p.or {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.signin p.or::before {
+  content: "";
+  display: inline-block;
+  width: 30%;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  right: 0.5em;
+  margin-left: -50%;
+  background: linear-gradient(90deg, transparent, rgba(117, 117, 117, 0.4), rgba(117, 117, 117, 0.4));
+}
+.signin p.or::after {
+  content: "";
+  display: inline-block;
+  width: 30%;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  left: 0.5em;
+  margin-right: -50%;
+  background: linear-gradient(90deg, transparent, rgba(117, 117, 117, 0.4), rgba(117, 117, 117, 0.4));
+}
+.signin .footer-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+}/*# sourceMappingURL=style.module.css.map */
