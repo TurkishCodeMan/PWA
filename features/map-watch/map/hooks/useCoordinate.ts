@@ -24,6 +24,7 @@ export function useCoordinate() {
   React.useEffect(() => {
     socketInitializer();
   }, []);
+  
 
   React.useEffect(() => {
     sendCoordinates();
