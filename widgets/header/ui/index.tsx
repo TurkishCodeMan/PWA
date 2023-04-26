@@ -52,7 +52,7 @@ export default function Header() {
             </Link>
           </li>
           <li className={style["nav-list-item"]}>
-            <Link href="#">
+            <Link href="/add-user">
               <BsPeople size={25} />
             </Link>
           </li>

@@ -34,7 +34,6 @@ export default function Map() {
   const [coords, setCoords] = React.useState([]);
 
   React.useEffect(() => {
-    console.log("-**-");
     socket.on("send", (data: any) => {
       console.log(data, "SEND-COORD");
       setCoords(data);
@@ -98,4 +97,4 @@ function MyUserMarker() {
 }
 function MyOtherUsers({ geoData }: { geoData: { lat: number; lng: number } }) {
   return <Marker icon={DefaultIcon} position={[geoData?.lat, geoData?.lng]} />;
-}
+} 

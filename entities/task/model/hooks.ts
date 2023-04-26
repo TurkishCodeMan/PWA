@@ -121,6 +121,21 @@ export function useTaskAddMembers() {
     }
   );
 }
+export function useTaskRemoveMembers() {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (data: {
+      members:string[],
+      id:string
+    }) => fetcher({ url: "/api/task/remove-member", method: "PUT", body: data }),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("task-groups");
+      },
+    }
+  );
+}
 export function useUpdateTaskDetail() {
   const queryClient = useQueryClient();
 

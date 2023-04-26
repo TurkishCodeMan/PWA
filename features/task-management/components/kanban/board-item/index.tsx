@@ -25,6 +25,7 @@ import {
   useCreateTask,
   useDeleteTask,
   useTaskAddMembers,
+  useTaskRemoveMembers,
   useUpdateTask,
   useUpdateTaskDetail,
 } from "@/entities/task/model";
@@ -104,6 +105,8 @@ export function BoardItem({
     useDeleteTask();
   const { mutateAsync: addMembers, isLoading: isLoadingMembers } =
     useTaskAddMembers();
+  const { mutateAsync: removeMembers, isLoading: isLoadingRemoveMembers } =
+    useTaskRemoveMembers();
   const { mutateAsync: updateAddress, isLoading: isLoadingAddress } =
     useUpdateAddress();
   const [companyEmployees, setCompanyEmployees] = React.useState(
@@ -136,17 +139,20 @@ export function BoardItem({
     return setSelectedUserTags((curr) => curr.filter((val) => val != email));
   }
 
-  function removeSelectUser(email: string) {
+  async function removeSelectUser(email: string) {
+    await removeMembers({
+      id: item.id,
+      members: [email],
+    });
     return setSelectedUserTags((curr) => curr.filter((val) => val != email));
   }
 
-  async function addTeamMember() {
-    if (selectedUserTags.length > 0) {
-      return addMembers({
-        id: item.id,
-        members: selectedUserTags,
-      });
-    }
+  async function addTeamMember(item: TaskWithUsers, user: User) {
+    await addMembers({
+      id: item.id,
+      members: [user.email],
+    });
+    return selectUser(user.email);
   }
 
   //TODO: rxjs ile switchMap kullan tuş basımına göre
@@ -159,7 +165,7 @@ export function BoardItem({
   }
 
   function autoSaveAddress() {
-    console.log('---')
+    console.log("---");
     return updateAddressTask().execute<
       Address & { taskGroupId: string; taskId: string }
     >(updateAddress, {
@@ -312,64 +318,49 @@ export function BoardItem({
                                   )}
                                   className={style["add-user-content"]}
                                 >
-                                  <ul
-                                    className={clsx(style["user-list"])}
-                                    {...getMenuProps()}
-                                  >
-                                    {(inputValue != "" ||
-                                      selectedUserTags.length > 0) &&
-                                      companyEmployees
-                                        .filter((val) =>
-                                          getUserFilter(inputValue as string)(
-                                            val
-                                          )
-                                        )
-                                        .map((user, index) => (
-                                          <li
-                                            key={user.id}
-                                            className={clsx(
-                                              style["user"],
+                                  <ul className={clsx(style["user-list"])}>
+                                    {item.users.map((user, index) => (
+                                      <li
+                                        key={user.id}
+                                        className={clsx(
+                                          style["user"],
 
-                                              selectedUserTags.includes(
-                                                user.email
-                                              )
-                                                ? style["selected"]
-                                                : ""
-                                            )}
-                                            {...getItemProps({
-                                              item: user,
-                                              index,
-                                              key: user.id,
-                                            })}
-                                          >
-                                            <div
-                                              className={style["user-header"]}
-                                            >
-                                              <div className={style["avatar"]}>
-                                                <p>
-                                                  {upperFirstLetter(
-                                                    user.name as string
-                                                  )}
-                                                </p>
-                                              </div>
-                                              <p>
-                                                {user.name}{" "}
-                                                {user.lastName as string}
-                                              </p>
-                                            </div>
-                                            <XMarkIcon
-                                              onClick={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                removeSelectUser(user.email);
-                                              }}
-                                              className={clsx(
-                                                "icon",
-                                                style["close-icon"]
+                                          selectedUserTags.includes(user.email)
+                                            ? style["selected"]
+                                            : ""
+                                        )}
+                                        {...getItemProps({
+                                          item: user,
+                                          index,
+                                          key: user.id,
+                                        })}
+                                      >
+                                        <div className={style["user-header"]}>
+                                          <div className={style["avatar"]}>
+                                            <p>
+                                              {upperFirstLetter(
+                                                user.name as string
                                               )}
-                                            />
-                                          </li>
-                                        ))}
+                                            </p>
+                                          </div>
+                                          <p>
+                                            {user.name}{" "}
+                                            {user.lastName as string}
+                                          </p>
+                                        </div>
+                                        <XMarkIcon
+                                          onClick={async (e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            await removeSelectUser(user.email);
+                                          }}
+                                          className={clsx(
+                                            "icon",
+                                            style["close-icon"]
+                                          )}
+                                        />
+                                      </li>
+                                    ))}
                                   </ul>
 
                                   <div className={style["search-content"]}>
@@ -399,36 +390,35 @@ export function BoardItem({
                                     </div>
                                   </div>
 
-                                  <div className={style["finish-team"]}>
-                                    <h3>Finish Team</h3>
-                                    {item.users.map((user, index) => (
-                                      <div
-                                        key={user.id}
-                                        className={style["user-large"]}
-                                      >
-                                        <div className={style["avatar"]}>
-                                          <p>
-                                            {upperFirstLetter(
-                                              user.name as string
-                                            )}
-                                          </p>
-                                        </div>
-                                        <p>{user.name as string}</p>
-                                      </div>
-                                    ))}
-                                  </div>
-
-                                  <Button
-                                    onClick={async () => {
-                                      await addTeamMember();
-                                      close();
-                                      setSelectedUserTags([]);
-                                    }}
-                                    disabled={isLoadingMembers}
-                                    className={style["save-btn"]}
+                                  <div
+                                    {...getMenuProps()}
+                                    className={style["finish-team"]}
                                   >
-                                    Save
-                                  </Button>
+                                    <h3>Finish Team</h3>
+
+                                    {companyEmployees
+                                      .filter((val) =>
+                                        getUserFilter(inputValue as string)(val)
+                                      )
+                                      .map((user, index) => (
+                                        <div
+                                          key={user.id}
+                                          onClick={() =>
+                                            addTeamMember(item, user)
+                                          }
+                                          className={style["user-large"]}
+                                        >
+                                          <div className={style["avatar"]}>
+                                            <p>
+                                              {upperFirstLetter(
+                                                user.name as string
+                                              )}
+                                            </p>
+                                          </div>
+                                          <p>{user.name as string}</p>
+                                        </div>
+                                      ))}
+                                  </div>
                                 </div>
                               )}
                             </Downshift>
@@ -552,8 +542,6 @@ export function BoardItem({
               setIsOpen={setIsOpen}
             />
           )}
-
-    
         </>
       )}
     </Draggable>
