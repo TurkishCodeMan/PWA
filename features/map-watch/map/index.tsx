@@ -54,7 +54,6 @@ export default function Map() {
         <MyOtherUsers geoData={val} />
       ))}
 
-      <MyUserMarker />
     </MapContainer>
   );
 }
@@ -66,14 +65,15 @@ async function coordToJson(coords: string) {
 function MyTask() {
   const [geoData, setGeoData] = React.useState({ lat: 0, lng: 0 });
   const map = useMap();
-  const { data } = useGetTaskById("15a08ced-258d-4168-9578-e7388f6c502a");
-
+  const { data } = useGetTaskById("ae3faeb4-4cb2-497c-bde6-8c5a5c44b9e2");
+console.log(data,'DATA')
   React.useEffect(() => {
     async function revised() {
       const coords = await coordToJson(data?.coords as string);
-      setGeoData({ lat: parseInt(coords.lat), lng: parseInt(coords.lon) });
+      console.log(coords)
+      setGeoData({ lat: (coords.lat), lng: (coords.lon) });
     }
-    if (data) revised();
+    if (data ) revised();
   }, [data]);
 
   React.useEffect(() => {
@@ -81,8 +81,8 @@ function MyTask() {
       map.setView({ lat: geoData.lat, lng: geoData.lng }, 5);
     }
   }, [map, geoData]);
-
-  return <Marker icon={redIcon} position={[geoData?.lat, geoData?.lng]} />;
+console.log(geoData,'GWODATA')
+  return <Marker icon={redIcon} position={[geoData?.lng, geoData?.lat]} />;
 }
 function MyUserMarker() {
   const { geoData, map } = useCoordinate();
