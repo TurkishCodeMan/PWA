@@ -16,21 +16,27 @@ export function TaskDetailsModal({
   task,
   isOpen,
   setIsOpen,
+  addTask,
+  taskGroupId,
 }: {
-  task: TaskWithUsers;
+  task: TaskWithUsers | undefined;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  addTask: any;
+  taskGroupId: string;
 }) {
-
-
   const [taskInitial, setTaskInitial] = React.useState({
-    address: task.address?.address,
-    city: task.address?.city,
-    zipCode: task.address?.zipCode
+    address: task?.address?.address,
+    city: task?.address?.city,
+    zipCode: task?.address?.zipCode,
   });
 
-  const [startDate, setStartDate] = React.useState(new Date(task.startDate,));
-  const [endDate, setEndDate] = React.useState(new Date(task?.endDate ?? Date.now()));
+  const [startDate, setStartDate] = React.useState(
+    new Date(task?.startDate as Date)
+  );
+  const [endDate, setEndDate] = React.useState(
+    new Date(task?.endDate ?? Date.now())
+  );
   return (
     <Transition
       show={isOpen}
@@ -60,7 +66,21 @@ export function TaskDetailsModal({
             </Dialog.Title>
 
             <div className={style["modal-detail"]}>
-              <Formik initialValues={{ ...taskInitial }} onSubmit={() => {}}>
+              <Formik
+                initialValues={{ ...taskInitial }}
+                onSubmit={async (val) =>
+                  //TODO: rxjs işlem pending yap
+                  {
+                    setIsOpen(false);
+                    addTask({
+                      address: val.address,
+                      city: val.city,
+                      zipCode: val.zipCode,
+                      taskGroupId: taskGroupId,
+                    });
+                  }
+                }
+              >
                 {({ isSubmitting, getFieldProps }) => (
                   <Form>
                     <div className={style["formik-panel"]}>
@@ -94,7 +114,7 @@ export function TaskDetailsModal({
                         </label>
 
                         <div className={style["date-select-container"]}>
-                          <label
+                          {/* <label
                             className={style["start-select"]}
                             htmlFor="start-select"
                           >
@@ -123,7 +143,7 @@ export function TaskDetailsModal({
                               dateFormat="MM/dd/yyyy h:mm aa"
                               showTimeInput
                             />
-                          </label>
+                          </label> */}
                         </div>
                       </Form>
 

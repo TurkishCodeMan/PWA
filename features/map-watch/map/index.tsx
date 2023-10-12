@@ -7,7 +7,7 @@ import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
-import { useGetTaskById } from "@/entities/task/model";
+import { useAllTaskGroups, useGetTaskById } from "@/entities/task/model";
 import { useCoordinate } from "./hooks/useCoordinate";
 
 let DefaultIcon = L.icon({
@@ -32,28 +32,31 @@ export let socket = io();
 
 export default function Map() {
   const [coords, setCoords] = React.useState([]);
+  const { data, isLoading } = useAllTaskGroups();
+  const tasksList = data?.map((board) => board.tasks).flat();
+  console.log(tasksList);
+  // React.useEffect(() => {
+  //   socket.on("send", (data: any) => {
+  //     console.log(data, "SEND-COORD");
+  //     setCoords(data);
+  //   });
 
-  React.useEffect(() => {
-    socket.on("send", (data: any) => {
-      console.log(data, "SEND-COORD");
-      setCoords(data);
-    });
-
-    return () => {
-      socket.off("send");
-    };
-  }, [socket, coords]);
+  //   return () => {
+  //     socket.off("send");
+  //   };
+  // }, [socket, coords]);
   return (
     <MapContainer zoom={20} style={{ height: "40vh" }}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <MyTask />
+      {tasksList?.map((task) => (
+        <MyTask key={task.id} coords={task.coords as string} />
+      ))}
       {coords.map((val) => (
         <MyOtherUsers geoData={val} />
       ))}
-
     </MapContainer>
   );
 }
@@ -62,26 +65,23 @@ async function coordToJson(coords: string) {
   return await JSON.parse(coords);
 }
 
-function MyTask() {
+function MyTask({ coords }: { coords: string }) {
   const [geoData, setGeoData] = React.useState({ lat: 0, lng: 0 });
   const map = useMap();
-  const { data } = useGetTaskById("ae3faeb4-4cb2-497c-bde6-8c5a5c44b9e2");
-console.log(data,'DATA')
   React.useEffect(() => {
     async function revised() {
-      const coords = await coordToJson(data?.coords as string);
-      console.log(coords)
-      setGeoData({ lat: (coords.lat), lng: (coords.lon) });
+      const coord = await coordToJson(coords as string);
+      setGeoData({ lat: coord.lon, lng: coord.lat });
     }
-    if (data ) revised();
-  }, [data]);
+    if (coords) revised();
+  }, [coords]);
 
   React.useEffect(() => {
     if (geoData && map) {
       map.setView({ lat: geoData.lat, lng: geoData.lng }, 5);
     }
-  }, [map, geoData]);
-console.log(geoData,'GWODATA')
+  }, [map, geoData, coords]);
+  console.log(geoData, "GWODATA");
   return <Marker icon={redIcon} position={[geoData?.lng, geoData?.lat]} />;
 }
 function MyUserMarker() {
@@ -97,4 +97,4 @@ function MyUserMarker() {
 }
 function MyOtherUsers({ geoData }: { geoData: { lat: number; lng: number } }) {
   return <Marker icon={DefaultIcon} position={[geoData?.lat, geoData?.lng]} />;
-} 
+}

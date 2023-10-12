@@ -272,9 +272,9 @@ export function BoardItem({
                           className={style["popover-button"]}
                           onClick={() => setType(3)}
                         >
-                          <p>
+                          
                             <PlusCircleIcon className={clsx("icon")} />
-                          </p>
+                          
                         </Popover.Button>
                       </div>
                     </div>
@@ -535,13 +535,13 @@ export function BoardItem({
             )}
           </Popover>
 
-          {isOpen && (
+          {/* {isOpen && (
             <TaskDetailsModal
               task={item}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
             />
-          )}
+          )} */}
         </>
       )}
     </Draggable>
