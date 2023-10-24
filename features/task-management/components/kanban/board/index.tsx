@@ -40,12 +40,13 @@ export function Board({
   const { mutateAsync: createTask, isLoading } = useCreateTask();
 
 
-  async function addTask({address="",city= "",zipCode="",taskGroupId}:{address:string, city:string, zipCode:string,taskGroupId:string}){
+  async function addTask({address="",city= "",zipCode="",coords=[],taskGroupId}:{address:string, city:string, zipCode:string,coords:number[],taskGroupId:string}){
     console.log('burada',address,city,zipCode,taskGroupId)
      await createTask({
       address,
       city,
       zipCode,
+      coords,
       startDate:new Date(),
       endDate:new Date(),
       taskGroupId

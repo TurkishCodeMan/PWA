@@ -12,7 +12,7 @@ handler.use(middleware);
 
 handler.post(async (req, res) => {
   try {
-    const { address, city, zipCode, startDate, endDate, taskGroupId } =
+    const { address, city, zipCode,coords, startDate, endDate, taskGroupId } =
       req.body;
 
     const addressa = await req.db.address.create({
@@ -20,6 +20,8 @@ handler.post(async (req, res) => {
         address,
         city,
         zipCode,
+        coords:coords.map((coord:number) =>coord.toString()).join(','),
+        
       },
     });
     const task = await req.db.task.create({

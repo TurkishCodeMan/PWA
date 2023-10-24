@@ -4,6 +4,8 @@ import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import React from "react";
 
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import "leaflet-boundary-canvas";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
@@ -28,31 +30,48 @@ var LeafIcon = L.Icon.extend({
 //@ts-expect-error
 var redIcon = new LeafIcon({ iconUrl: "leaf-red.png" });
 
-export let socket = io();
+// export let socket = io();
 
 export default function Map() {
   const [coords, setCoords] = React.useState([]);
   const { data, isLoading } = useAllTaskGroups();
   const tasksList = data?.map((board) => board.tasks).flat();
   console.log(tasksList);
-  // React.useEffect(() => {
-  //   socket.on("send", (data: any) => {
-  //     console.log(data, "SEND-COORD");
-  //     setCoords(data);
-  //   });
+  const [map, setMap] = React.useState(null);
 
-  //   return () => {
-  //     socket.off("send");
-  //   };
-  // }, [socket, coords]);
+  React.useEffect(() => {
+    if (!map) return;
+
+    const fetchGeoJSON = async () => {
+      const response = await fetch(
+        "https://cdn.rawgit.com/johan/world.geo.json/34c96bba/countries/POL.geo.json"
+      );
+      const geoJSON = await response.json();
+      const osm = L.TileLayer.boundaryCanvas(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          boundary: geoJSON,
+          attribution:
+            '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, UK shape <a href="https://github.com/johan/world.geo.json">johan/word.geo.json</a>'
+        }
+      );
+      map?.addLayer(osm);
+      const ukLayer = L.geoJSON(geoJSON);
+      map?.fitBounds(ukLayer.getBounds());
+    };
+
+    fetchGeoJSON();
+  }, [map]);
+
   return (
-    <MapContainer zoom={20} style={{ height: "40vh" }}>
-      <TileLayer
+    <MapContainer whenReady={setMap} zoom={20} style={{ height: "40vh" }}>
+      {/* <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+        
+      /> */}
       {tasksList?.map((task) => (
-        <MyTask key={task.id} coords={task.coords as string} />
+        <MyTask key={task.id} coords={task.address?.coords as string} />
       ))}
       {coords.map((val) => (
         <MyOtherUsers geoData={val} />
@@ -61,8 +80,9 @@ export default function Map() {
   );
 }
 
-async function coordToJson(coords: string) {
-  return await JSON.parse(coords);
+ function coordToJson(coords: string) {
+
+  return coords.split(',').map(v=>parseFloat(v));
 }
 
 function MyTask({ coords }: { coords: string }) {
@@ -70,8 +90,8 @@ function MyTask({ coords }: { coords: string }) {
   const map = useMap();
   React.useEffect(() => {
     async function revised() {
-      const coord = await coordToJson(coords as string);
-      setGeoData({ lat: coord.lon, lng: coord.lat });
+      const coord = coordToJson(coords as string);
+      setGeoData({ lat: coord[0], lng: coord[1] });
     }
     if (coords) revised();
   }, [coords]);
@@ -81,7 +101,6 @@ function MyTask({ coords }: { coords: string }) {
       map.setView({ lat: geoData.lat, lng: geoData.lng }, 5);
     }
   }, [map, geoData, coords]);
-  console.log(geoData, "GWODATA");
   return <Marker icon={redIcon} position={[geoData?.lng, geoData?.lat]} />;
 }
 function MyUserMarker() {

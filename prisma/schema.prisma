@@ -115,8 +115,6 @@ model TaskGroup {
 
   @@unique([companyId, name])
   @@index([companyId, id])
-
-
 }
 
 model Task {
@@ -132,7 +130,6 @@ model Task {
   status      TASK_STATUS @default(NOT_STARTED)
   name        String?
   description String?
-  coords String?
 
   startDate DateTime  @default(now())
   endDate   DateTime?
@@ -148,10 +145,20 @@ model Task {
   @@index([ownerId])
 }
 
+model Coords {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  value     Int
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?
+}
+
 model Address {
-  id      String @id @default(uuid())
+  id      String   @id @default(uuid())
   address String
   city    String
   zipCode String
+  coords  Coords[]
   tasks   Task[]
 }

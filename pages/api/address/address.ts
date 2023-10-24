@@ -24,17 +24,12 @@ handler.put(async (req, res) => {
         address,
         city,
         zipCode,
+        coords:JSON.stringify(coords)
+
       },
     });
 
-    await req.db.task.update({
-      where:{
-        id:taskId,
-      },
-      data:{
-        coords:JSON.stringify(coords)
-      }
-    })
+
 
     res.status(201).json({ message: "Address Update" });
   } catch (error) {

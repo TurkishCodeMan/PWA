@@ -11,6 +11,7 @@ import DatePicker from "react-datepicker";
 import { GiWorld } from "react-icons/gi";
 import { TaskGroupWithTasks, useCreateTask } from "@/entities/task/model";
 import { TaskWithUsers } from "..";
+import { AdressSearch } from "../adress-search";
 
 export function TaskDetailsModal({
   task,
@@ -37,6 +38,8 @@ export function TaskDetailsModal({
   const [endDate, setEndDate] = React.useState(
     new Date(task?.endDate ?? Date.now())
   );
+  const [selectedAdress, setSelectedAdress] = React.useState('' as any);
+
   return (
     <Transition
       show={isOpen}
@@ -68,15 +71,17 @@ export function TaskDetailsModal({
             <div className={style["modal-detail"]}>
               <Formik
                 initialValues={{ ...taskInitial }}
+                
                 onSubmit={async (val) =>
                   //TODO: rxjs işlem pending yap
                   {
                     setIsOpen(false);
                     addTask({
-                      address: val.address,
+                      address: selectedAdress?.adressebetegnelse,
                       city: val.city,
                       zipCode: val.zipCode,
                       taskGroupId: taskGroupId,
+                      coords:selectedAdress?.adgangsadresse?.vejpunkt?.koordinater
                     });
                   }
                 }
@@ -86,31 +91,13 @@ export function TaskDetailsModal({
                     <div className={style["formik-panel"]}>
                       <Form id="task" className={style["task-form"]}>
                         <label htmlFor="address">
-                          <Input
+                          {/* <Input
                             type="text"
                             placeholder="Adresse"
                             id="address"
                             {...getFieldProps("address")}
-                          />
-                        </label>
-
-                        <label htmlFor="city">
-                          <Input
-                            className={style["input"]}
-                            type="text"
-                            placeholder="City"
-                            id="city"
-                            {...getFieldProps("city")}
-                          />
-                        </label>
-                        <label htmlFor="zipCode">
-                          <Input
-                            className={style["input"]}
-                            type="text"
-                            placeholder="Zip-code"
-                            id="zipCode"
-                            {...getFieldProps("zipCode")}
-                          />
+                          /> */}
+                          <AdressSearch selectedAdress={selectedAdress} setSelectedAdress={setSelectedAdress}/>
                         </label>
 
                         <div className={style["date-select-container"]}>
