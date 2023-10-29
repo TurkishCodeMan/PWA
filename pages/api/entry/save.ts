@@ -59,6 +59,7 @@ handler.post(async (req, res) => {
         },
       },
     });
+    console.log(company)
     //Save TaskGroup
     await Promise.all([
       ...groupsEmployees.map((val: any) =>

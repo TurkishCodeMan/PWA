@@ -48,7 +48,7 @@ export default function Map() {
         
       />
       {tasksList?.map((task) => (
-        <MyTask key={task.id} coords={task.address?.coords as string} />
+        <MyTask key={task.id} coords={task?.address?.coords as string} />
       ))}
       {coords.map((val) => (
         <MyOtherUsers geoData={val} />
