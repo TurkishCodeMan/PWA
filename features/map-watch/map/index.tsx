@@ -37,39 +37,16 @@ export default function Map() {
   const { data, isLoading } = useAllTaskGroups();
   const tasksList = data?.map((board) => board.tasks).flat();
   console.log(tasksList);
-  const [map, setMap] = React.useState(null);
 
-  React.useEffect(() => {
-    if (!map) return;
 
-    const fetchGeoJSON = async () => {
-      const response = await fetch(
-        "https://cdn.rawgit.com/johan/world.geo.json/34c96bba/countries/POL.geo.json"
-      );
-      const geoJSON = await response.json();
-      const osm = L.TileLayer.boundaryCanvas(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-          boundary: geoJSON,
-          attribution:
-            '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, UK shape <a href="https://github.com/johan/world.geo.json">johan/word.geo.json</a>'
-        }
-      );
-      map?.addLayer(osm);
-      const ukLayer = L.geoJSON(geoJSON);
-      map?.fitBounds(ukLayer.getBounds());
-    };
-
-    fetchGeoJSON();
-  }, [map]);
 
   return (
-    <MapContainer whenReady={setMap} zoom={20} style={{ height: "40vh" }}>
-      {/* <TileLayer
+    <MapContainer  zoom={20} style={{ height: "40vh" }}>
+      <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         
-      /> */}
+      />
       {tasksList?.map((task) => (
         <MyTask key={task.id} coords={task.address?.coords as string} />
       ))}
