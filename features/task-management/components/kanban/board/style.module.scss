@@ -11,6 +11,12 @@
   position: relative;
   min-height: 50vh;
   width: 26rem;
+  background-size:cover;
+    -moz-box-shadow: inset 0px 850px 500px -500px #fff;
+    -webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
+    -o-box-shadow: inset 0px 850px 500px -500px #fff;
+
+  
 
   &.loading {
     opacity: .5;
