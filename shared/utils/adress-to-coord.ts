@@ -2,7 +2,8 @@ import { fetcher } from "../api/client";
 
 export async function addressToCoordinates(address: string) {
   const data = await fetcher({
-    url: `https://geocode.maps.co/search?q=${address}`,
+    url: `https://api.dataforsyningen.dk/adresser?q=${address}`,
   });
-  return { lat: data[0].lat, lon: data[0].lon };
+
+  return { lon: data[1].adgangsadresse.vejpunkt.koordinater[0], lat: data[1].adgangsadresse.vejpunkt.koordinater[1] };
 }

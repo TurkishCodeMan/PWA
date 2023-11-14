@@ -63,6 +63,7 @@ export function useCreateTask() {
       address: string;
       city: string;
       zipCode: string;
+      coords:number[],
       taskGroupId:string,
       startDate:Date,
       endDate:Date

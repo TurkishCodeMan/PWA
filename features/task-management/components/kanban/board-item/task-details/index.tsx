@@ -11,26 +11,35 @@ import DatePicker from "react-datepicker";
 import { GiWorld } from "react-icons/gi";
 import { TaskGroupWithTasks, useCreateTask } from "@/entities/task/model";
 import { TaskWithUsers } from "..";
+import { AdressSearch } from "../adress-search";
 
 export function TaskDetailsModal({
   task,
   isOpen,
   setIsOpen,
+  addTask,
+  taskGroupId,
 }: {
-  task: TaskWithUsers;
+  task: TaskWithUsers | undefined;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  addTask: any;
+  taskGroupId: string;
 }) {
-
-
   const [taskInitial, setTaskInitial] = React.useState({
-    address: task.address?.address,
-    city: task.address?.city,
-    zipCode: task.address?.zipCode
+    address: task?.address?.address,
+    city: task?.address?.city,
+    zipCode: task?.address?.zipCode,
   });
 
-  const [startDate, setStartDate] = React.useState(new Date(task.startDate,));
-  const [endDate, setEndDate] = React.useState(new Date(task?.endDate ?? Date.now()));
+  const [startDate, setStartDate] = React.useState(
+    new Date(task?.startDate as Date)
+  );
+  const [endDate, setEndDate] = React.useState(
+    new Date(task?.endDate ?? Date.now())
+  );
+  const [selectedAdress, setSelectedAdress] = React.useState('' as any);
+
   return (
     <Transition
       show={isOpen}
@@ -60,41 +69,39 @@ export function TaskDetailsModal({
             </Dialog.Title>
 
             <div className={style["modal-detail"]}>
-              <Formik initialValues={{ ...taskInitial }} onSubmit={() => {}}>
+              <Formik
+                initialValues={{ ...taskInitial }}
+                
+                onSubmit={async (val) =>
+                  //TODO: rxjs işlem pending yap
+                  {
+                    setIsOpen(false);
+                    addTask({
+                      address: selectedAdress?.adressebetegnelse,
+                      city: val.city,
+                      zipCode: val.zipCode,
+                      taskGroupId: taskGroupId,
+                      coords:selectedAdress?.adgangsadresse?.vejpunkt?.koordinater
+                    });
+                  }
+                }
+              >
                 {({ isSubmitting, getFieldProps }) => (
                   <Form>
                     <div className={style["formik-panel"]}>
                       <Form id="task" className={style["task-form"]}>
                         <label htmlFor="address">
-                          <Input
+                          {/* <Input
                             type="text"
                             placeholder="Adresse"
                             id="address"
                             {...getFieldProps("address")}
-                          />
-                        </label>
-
-                        <label htmlFor="city">
-                          <Input
-                            className={style["input"]}
-                            type="text"
-                            placeholder="City"
-                            id="city"
-                            {...getFieldProps("city")}
-                          />
-                        </label>
-                        <label htmlFor="zipCode">
-                          <Input
-                            className={style["input"]}
-                            type="text"
-                            placeholder="Zip-code"
-                            id="zipCode"
-                            {...getFieldProps("zipCode")}
-                          />
+                          /> */}
+                          <AdressSearch selectedAdress={selectedAdress} setSelectedAdress={setSelectedAdress}/>
                         </label>
 
                         <div className={style["date-select-container"]}>
-                          <label
+                          {/* <label
                             className={style["start-select"]}
                             htmlFor="start-select"
                           >
@@ -123,7 +130,7 @@ export function TaskDetailsModal({
                               dateFormat="MM/dd/yyyy h:mm aa"
                               showTimeInput
                             />
-                          </label>
+                          </label> */}
                         </div>
                       </Form>
 

@@ -10,6 +10,8 @@ import { Input } from "@/shared/components/input";
 import DatePicker from "react-datepicker";
 import { GiWorld } from "react-icons/gi";
 import { TaskGroupWithTasks, useCreateTask } from "@/entities/task/model";
+import { TaskDetailsModal } from "../board-item/task-details";
+import { TaskWithUsers } from "../board-item";
 
 interface BoardTypes {
   title: string;
@@ -27,6 +29,7 @@ export function Board({
   let [isOpen, setIsOpen] = React.useState(false);
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
+  const [taskShadow, setTaskShadow] = React.useState<TaskWithUsers>();
 
   const [taskInitial, setTaskInitial] = React.useState({
     address: "",
@@ -37,19 +40,22 @@ export function Board({
   const { mutateAsync: createTask, isLoading } = useCreateTask();
 
 
-  async function addTask(){
+  async function addTask({address="",city= "",zipCode="",coords=[],taskGroupId}:{address:string, city:string, zipCode:string,coords:number[],taskGroupId:string}){
+    console.log('burada',address,city,zipCode,taskGroupId)
      await createTask({
-      address:'',
-      city:'',
-      zipCode:'',
+      address,
+      city,
+      zipCode,
+      coords,
       startDate:new Date(),
       endDate:new Date(),
-      taskGroupId:id
+      taskGroupId
     })
   }
 
 
   return (
+  <>
     <Draggable draggableId={id} index={index}>
       {(provided) => (
         <article
@@ -65,7 +71,7 @@ export function Board({
                 <h2>{title}</h2>
 
                 <span>
-                  <div onClick={addTask} role="button"  className={style["plus-area"]}>
+                  <div onClick={()=>setIsOpen(true)}  role="button"  className={style["plus-area"]}>
                     <PlusIcon className={clsx("icon")} />
                   </div>
                   <Popover.Button className={style["popover-button"]}>
@@ -127,5 +133,14 @@ export function Board({
         </article>
       )}
     </Draggable>
+     {isOpen && (
+      <TaskDetailsModal
+        task={taskShadow}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        addTask={addTask}
+        taskGroupId={id}
+      />
+    )}</>
   );
 }

@@ -1,6 +1,6 @@
 import { useMap } from "react-leaflet";
 import React from "react";
-import { socket } from "..";
+// import { socket } from "..";
 
 export function useCoordinate() {
   const [geoData, setGeoData] = React.useState({ lat: 0, lng: 0 });
@@ -9,9 +9,9 @@ export function useCoordinate() {
   async function socketInitializer() {
     await fetch("/api/socket");
   }
-  async function sendCoordinates() {
-    socket.emit("coordinates", geoData);
-  }
+  // async function sendCoordinates() {
+  //   socket.emit("coordinates", geoData);
+  // }
 
   function success(pos: any) {
     const crd = pos.coords;
@@ -27,7 +27,7 @@ export function useCoordinate() {
   
 
   React.useEffect(() => {
-    sendCoordinates();
+    // sendCoordinates();
   }, [map, geoData]);
 
 

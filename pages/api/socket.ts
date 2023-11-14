@@ -25,7 +25,7 @@ handler.get(async (req,res)=>{
     //@ts-expect-error
     res.socket.server.io = io;
 
-    io?.on("connection", (socket) => watchSocket(socket,req));
+    // io?.on("connection", (socket) => watchSocket(socket,req));
   }
 
   res.end();

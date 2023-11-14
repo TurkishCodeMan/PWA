@@ -1825,6 +1825,21 @@
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
+"@types/leaflet-boundary-canvas@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/leaflet-boundary-canvas/-/leaflet-boundary-canvas-1.0.2.tgz#084c97118c793f4881d41892bbbbefeac5e0d96c"
+  integrity sha512-qXMZPe8CQ2wZnLw9hiaryOpx/NQTlypR0Vz0NW45+MrqO5Tgd3k2osI9pZEFB17zx//3wcnoWv0EwsLkOUFwMg==
+  dependencies:
+    "@types/geojson" "*"
+    "@types/leaflet" "*"
+
+"@types/leaflet@*":
+  version "1.9.7"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.7.tgz#c9a216d77bcdd1f9af4e3100ff3d71cffa437af7"
+  integrity sha512-FOfKB1ALYUDnXkH7LfTFreWiZr9R7GErqGP+8lYQGWr2GFq5+jy3Ih0M7e9j41cvRN65kLALJ4dc43yZwyl/6g==
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/leaflet@^1.9.3":
   version "1.9.3"
   resolved "https://registry.npmjs.org/@types/leaflet/-/leaflet-1.9.3.tgz"
@@ -5130,7 +5145,16 @@ language-tags@=1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
+<<<<<<< HEAD
 leaflet@^1.9.0, leaflet@^1.9.3:
+=======
+leaflet-boundary-canvas@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/leaflet-boundary-canvas/-/leaflet-boundary-canvas-1.0.0.tgz#2b4c2d9f4aac4328e58588f89039d483f7c3fa84"
+  integrity sha512-+0kTmtqOBIKM5iOI8lywAAPHpKVHBSkyjdg/UvPW+M9moc8f1lBWaF7KEL6uc5cL3FAQf5J66bRFtJQ0bxPoLA==
+
+leaflet@^1.9.3:
+>>>>>>> c0bdcbdfc48309ba0fa9ad56effe1653e58fe03f
   version "1.9.3"
   resolved "https://registry.npmjs.org/leaflet/-/leaflet-1.9.3.tgz"
   integrity sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==

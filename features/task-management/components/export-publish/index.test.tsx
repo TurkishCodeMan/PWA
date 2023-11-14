@@ -1,5 +1,5 @@
 import { getAllByText, render } from '@testing-library/react';
-import { ExportPublish } from './';
+import { ExportPublish } from '.';
 import React from 'react';
 
 test('renders publish button', () => {

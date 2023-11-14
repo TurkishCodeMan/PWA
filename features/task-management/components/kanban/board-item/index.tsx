@@ -215,15 +215,7 @@ export function BoardItem({
                   onChange={onChange}
                   onBlur={autoSaveAddress}
                 />
-                <Input
-                  value={addressClient?.zipCode}
-                  name="zipCode"
-                  size_type="small"
-                  contentEditable
-                  placeholder="Zipcode"
-                  onChange={onChange}
-                  onBlur={autoSaveAddress}
-                />
+             
 
                 <div className={style["actions"]}>
                   <Popover.Button key={1} className={style["popover-button"]}>
@@ -272,9 +264,9 @@ export function BoardItem({
                           className={style["popover-button"]}
                           onClick={() => setType(3)}
                         >
-                          <p>
+                          
                             <PlusCircleIcon className={clsx("icon")} />
-                          </p>
+                          
                         </Popover.Button>
                       </div>
                     </div>
@@ -535,13 +527,13 @@ export function BoardItem({
             )}
           </Popover>
 
-          {isOpen && (
+          {/* {isOpen && (
             <TaskDetailsModal
               task={item}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
             />
-          )}
+          )} */}
         </>
       )}
     </Draggable>
