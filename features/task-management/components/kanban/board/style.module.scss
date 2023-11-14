@@ -2,7 +2,8 @@
 
 .board {
   background:var(--board-bg) 0% 0% no-repeat padding-box;
-  border-radius: 0.5rem;
+  //border-radius: 0.5rem;
+  border-right: solid 1px #fff;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
