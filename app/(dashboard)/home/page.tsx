@@ -7,7 +7,8 @@ export default function Home() {
   return (
     <div className={style["container"]}>
       <Header />
-      <TaskManagement.ExportPublish />
+   
+           <TaskManagement.ExportPublish />
       <TaskManagement.Kanban />
     </div>
   );

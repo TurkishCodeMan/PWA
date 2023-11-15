@@ -29,10 +29,11 @@ header#header {
       z-index: 2;
     }
 
+
     .menu-button {
       padding: 1rem;
       background: transparent;
-      border: 1px solid #eee;
+      border: 0px solid #eee;
       border-radius: 1rem;
       display: flex;
       align-items: center;
@@ -76,6 +77,47 @@ header#header {
     }
   }
 
+  .avatar {
+    display: flex;
+    align-items: center;
+    width: 6rem;
+    gap: 2rem;
+    padding-right: 1rem;
+  }
+
+  .menu-items-avatar {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    background: #fff;
+    flex-direction: column;
+    left: -9rem;
+    top: 50%;
+    position: absolute;
+    margin-top: 3rem;
+    transform-origin: top;
+    width: 18rem;
+    border-radius: 1rem;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    transition: var(--transation-duration);
+
+    .menu-item-avatar {
+      color: #262753;
+      text-decoration: none;
+      padding: 1rem 1rem;
+      transition: var(--transation-duration);
+
+      &:first-child {
+        margin-top: 2rem;
+      }
+
+      &:hover {
+        background-color: #e5e8f2;
+      }
+    }
+  }
+
+
   .nav {
     position: relative;
 
@@ -87,9 +129,11 @@ header#header {
 
       .nav-list-item {
         transition: var(--transation-duration);
+
         &:hover {
           transform: scale(1.05);
         }
+
         a {
           color: #262753;
         }
@@ -102,14 +146,16 @@ header#header {
   header#header {
     flex-direction: column;
     gap: 1rem;
+
     .logo {
       width: 100%;
 
       .menu-button {
         img {
-          width: 3rem;
-          height: 3rem;
+          width: 6rem;
+          height: 7rem;
         }
+
         p,
         svg {
           display: none;
@@ -131,9 +177,11 @@ header#header {
         border-radius: 0.5rem;
         padding: 0.5rem 1rem;
         background: #ebf1ff 0% 0% no-repeat padding-box;
+
         .nav-list-item {
           position: relative;
         }
+
         .nav-list-item.active {
           &::after {
             content: "";

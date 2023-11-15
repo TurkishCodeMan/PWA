@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="145" height="162" viewBox="0 0 145 162">
+  <defs>
+    <filter id="Path_516" x="33.694" y="61.075" width="76.152" height="65.475" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_517" x="33.694" y="40.83" width="76.152" height="65.475" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_518" x="23.694" y="55.075" width="88.152" height="77.475" filterUnits="userSpaceOnUse">
+      <feOffset dx="-4" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_519" x="51.906" y="46.811" width="57.94" height="66.493" filterUnits="userSpaceOnUse">
+      <feOffset dy="10" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Logo">
+      <rect width="145" height="162"/>
+    </clipPath>
+  </defs>
+  <g id="Logo" clip-path="url(#clip-Logo)">
+    <g id="Group_255" data-name="Group 255" transform="translate(-50 -39)">
+      <path id="Path_551" data-name="Path 551" d="M-1496.36,2101l-57.2,34.974v61.95l57.2,38.617,60.262-38.617v-61.95Z" transform="translate(1617.523 -2049.09)" fill="#2474ff" stroke="#2474ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="21"/>
+      <path id="Path_552" data-name="Path 552" d="M4824.638,1397.984l45.476,36.4,48.595-31.344a12.225,12.225,0,0,0,2.347-2.55,7.054,7.054,0,0,0,1.4-3.209c.385-1.646,0-35.5,0-35.5l-43.232-28.116s-35.72,1.305-42.484,7.476c-2.712,2.474,7.394,13.169,5.34,24.091C4839.144,1380.866,4824.638,1397.984,4824.638,1397.984Z" transform="translate(-4731.174 -1246.929)" fill="#1059d8"/>
+      <g id="Group_250" data-name="Group 250" transform="translate(-307.861 -448.9)">
+        <g transform="matrix(1, 0, 0, 1, 357.86, 487.9)" filter="url(#Path_516)">
+          <path id="Path_516-2" data-name="Path 516" d="M5246.785,1566.842s-8.551-1.348-12.9,5.6-19.662,33.5-19.662,33.5-5.758,7.865,4.143,8.146,45.011,0,45.011,0,11.025.773,6.039-8.146-15.449-26.824-15.449-26.824l-6.25,6.811,11.095,19.381h-34.337Z" transform="translate(-5169.86 -1499.66)" fill="#fff"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 357.86, 487.9)" filter="url(#Path_517)">
+          <path id="Path_517-2" data-name="Path 517" d="M5246.785,1566.842s-8.551-1.348-12.9,5.6-19.662,33.5-19.662,33.5-5.758,7.865,4.143,8.146,45.011,0,45.011,0,11.025.773,6.039-8.146-15.449-26.824-15.449-26.824l-6.25,6.811,11.095,19.381h-34.337Z" transform="translate(5313.4 1661.04) rotate(180)" fill="#fff"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 357.86, 487.9)" filter="url(#Path_518)">
+          <path id="Path_518-2" data-name="Path 518" d="M5246.785,1566.842s-8.551-1.348-12.9,5.6-19.662,33.5-19.662,33.5-5.758,7.865,4.143,8.146,45.011,0,45.011,0,11.025.773,6.039-8.146-15.449-26.824-15.449-26.824l-6.25,6.811,11.095,19.381h-34.337Z" transform="translate(-5169.86 -1499.66)" fill="#fff"/>
+        </g>
+        <g transform="matrix(1, 0, 0, 1, 357.86, 487.9)" filter="url(#Path_519)">
+          <path id="Path_519-2" data-name="Path 519" d="M5246.785,1566.842s-8.551-1.348-12.9,5.6-19.662,33.5-19.662,33.5-5.758,7.865,4.143,8.146,16.957,0,16.957,0a34.547,34.547,0,0,0,15.07-1.98c7.292-2.917-6.7-6.8-6.7-6.8h-19.22Z" transform="translate(5313.4 1661.04) rotate(180)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
