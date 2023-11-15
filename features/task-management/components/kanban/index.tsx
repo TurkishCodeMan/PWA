@@ -11,9 +11,12 @@ import {
   useAllTaskGroups,
   useUpdateTask,
 } from "@/entities/task/model";
+import { useSession } from "next-auth/react";
 
 export function Kanban() {
   // SEARCH YAP DOWNSHİFT
+  const { data: session, status } = useSession();
+
 
   const { data, isLoading } = useAllTaskGroups();
   const { mutateAsync: updateTaskGroup, isLoading: isLoadingTaskGroup } =

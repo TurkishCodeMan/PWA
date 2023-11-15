@@ -16,7 +16,7 @@ export type UserWithCompanies = Prisma.UserGetPayload<
 
 export function useMe() {
   const {data}=useSession();
- 
+ console.log(data,'DATA');
   const queryClient = useQueryClient();
 
   const result = useQuery<UserWithCompanies>({

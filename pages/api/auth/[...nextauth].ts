@@ -69,7 +69,14 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       },
       async jwt({ token, user, account, profile, isNewUser }) {
         if (token && user) {
-          return { token: token, ...user, id: `${user.id}` };
+          return {
+            token: token,
+            ...user,
+            id: `${user.id}`,
+            accessTokenExpires:
+              Date.now() + (account?.expires_in as any) * 1000,
+            refreshToken: account?.refresh_token,
+          };
         }
 
         return token;
