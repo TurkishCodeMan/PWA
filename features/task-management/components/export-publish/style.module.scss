@@ -1,17 +1,66 @@
 @use "@/shared/style/mixins" as mixin;
 
 .bar {
+
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
   height: 7rem;
   padding: 1rem;
   background: #fff;
   @include mixin.box-shadow();
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+  }
+  .plusicon{ 
+    display: flex;
+    justify-content: space-between;
+    background-color: blue;
+    border-radius: 5px;
+    height: 3rem;
+    width: 3rem;
+    font-weight: bold;
+    color: #fff;
+    font-size: 4rem;
+    padding: 5px;
+  }
+  .circles{ 
+    display: flex;
+    justify-content: center;
+    background-color: #E5E8F2;
+    border-radius: 5rem;
+    font-weight: bold;
+    color: #000;
+    font-size: 13px;
+    padding: 6px;
+    border: 2px solid #fff;
+  }
+  .bgcircles{ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 80px;
+    background-color: #EBEBEB;
+    padding: 4px;
+    border-radius: 21px;
+  }
+  .border-right{
+    border-right: 1px solid #eee;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    left: 6rem;
+  }
   button {
     position: absolute;
+  
     //top: 1rem;
     max-width: 10rem;
     &:nth-child(1) {
@@ -20,6 +69,7 @@
 
     &:nth-child(2) {
       right: 1rem;
+      
     }
 
     div {
@@ -64,6 +114,7 @@
         justify-content: center;
         color: #fff;
         text-align: center;
+        
       }
     }
   }
