@@ -12,9 +12,9 @@
   min-height: 50vh;
   width: 26rem;
   background-size:cover;
-    -moz-box-shadow: inset 0px 850px 500px -500px #fff;
+   // -moz-box-shadow: inset 0px 850px 500px -500px #fff;
     -webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
-    -o-box-shadow: inset 0px 850px 500px -500px #fff;
+    //-o-box-shadow: inset 0px 850px 500px -500px #fff;
 
   
 
@@ -258,7 +258,18 @@
     background: transparent;
     min-height: 35vh;
     padding-bottom: 3rem;
+    width: 37rem;
+    //min-height: 50vh;
+    border-right: none;
+
+    background-size:cover; 
+    -webkit-box-shadow: inset 0px 0px 0px 0px #F6F7FB !important;
+    
     // @include mixin.box-shadow();
+
+
+
+    
 
     .popover-panel {
       left: unset;

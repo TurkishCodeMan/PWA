@@ -395,6 +395,19 @@
 
 
 @media (max-width:768px){
+
+
+  .board-item {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 9rem;
+    border-radius: 1rem;
+    transition: var(--transition-duration);
+    @include mixin.box-shadow();
+  }
+
   .calendar-panel {
     .rdrCalendarWrapper{
       font-size: .8rem !important;
