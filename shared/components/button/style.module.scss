@@ -17,7 +17,7 @@
     transform: scale(1.1);
     background: var(--_color-bg);
   }
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
   background: var(--_color-bg);
   color: var(--_color-text);
 
@@ -27,7 +27,8 @@
 
 
   &.primary {
-    --color: linear-gradient(to right, #00c7fc 10%, #077afb);
+    //--color: linear-gradient(to right, #00c7fc 10%, #077afb);
+     background-color: var(--dark-blue);
    
   }
   &.secondary {
