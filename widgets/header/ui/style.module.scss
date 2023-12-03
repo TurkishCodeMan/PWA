@@ -5,23 +5,24 @@ header#header {
   width: 100%;
   padding: 0.2rem;
   margin: 0;
-  background: #fafafa;
+  background: #fff;
 
   --transation-duration: 0.2s;
 
   .img {
     width: 6rem;
-    height: 6rem;
+    height: 7rem;
     object-fit: cover;
     background-position: center;
+    padding: 5px;
   }
 
   .logo {
     display: flex;
     align-items: center;
 
-    gap: 2rem;
-    border-right: 1px solid #eee;
+    gap: 4rem;
+    //border-right: 1px solid #eee;
     padding-right: 1rem;
 
     .menu {
@@ -38,7 +39,7 @@ header#header {
       display: flex;
       align-items: center;
       gap: 2rem;
-      font-size: 1.4rem;
+      font-size: 1.9rem;
       font-weight: bold;
       justify-content: space-between;
       cursor: pointer;
