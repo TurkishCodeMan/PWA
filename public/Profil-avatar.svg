@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61" height="66" viewBox="0 0 61 66">
+  <defs>
+    <filter id="Path_564" x="5.883" y="26.15" width="49.665" height="36.934" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_564-2" x="5.883" y="26.15" width="49.665" height="36.934" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-2"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-iPhone_14_Pro_Max_1">
+      <rect width="61" height="66"/>
+    </clipPath>
+  </defs>
+  <g id="iPhone_14_Pro_Max_1" data-name="iPhone 14 Pro Max – 1" clip-path="url(#clip-iPhone_14_Pro_Max_1)">
+    <g id="Group_347" data-name="Group 347" transform="translate(-114.29 -539.214)">
+      <g id="Group_340" data-name="Group 340" transform="translate(118.29 546.214)">
+        <circle id="Ellipse_18" data-name="Ellipse 18" cx="26.5" cy="26.5" r="26.5" transform="translate(0 0)" fill="#e9eaef"/>
+        <g id="Group_337" data-name="Group 337" transform="translate(8.061 5.394)">
+          <circle id="Ellipse_19" data-name="Ellipse 19" cx="18.346" cy="18.346" r="18.346" transform="translate(0 7.242)" fill="#fff"/>
+          <path id="Path_563" data-name="Path 563" d="M-454.034,1684.659s9.182-10.758,10.152-10.4,2.555,3.208,2.555,3.208,2.7-5.4,3.823-5.51,7.549,8.8,8.622,10.285,6.324,11.2,5.424,11.2-30.577-5.856-30.577-5.856Z" transform="translate(459.223 -1671.951)" fill="#fff"/>
+        </g>
+      </g>
+      <g id="Group_339" data-name="Group 339" transform="translate(129.173 571.364)">
+        <g data-type="innerShadowGroup">
+          <g transform="matrix(1, 0, 0, 1, -14.88, -32.15)" filter="url(#Path_564)">
+            <path id="Path_564-3" data-name="Path 564" d="M-451.1,1678.536s19.729-.127,24.629,0,2.94,10.184,2.94,10.184-1.108,8.565-7.968,8.607-5.284.17-11.462,0-9.332.767-11.377-8.607S-451.1,1678.536-451.1,1678.536Z" transform="translate(469.7 -1646.33)" fill="#a4a1bc"/>
+          </g>
+          <g transform="matrix(1, 0, 0, 1, -14.88, -32.15)" filter="url(#Path_564-2)">
+            <path id="Path_564-4" data-name="Path 564" d="M-451.1,1678.536s19.729-.127,24.629,0,2.94,10.184,2.94,10.184-1.108,8.565-7.968,8.607-5.284.17-11.462,0-9.332.767-11.377-8.607S-451.1,1678.536-451.1,1678.536Z" transform="translate(469.7 -1646.33)" fill="#fff"/>
+          </g>
+        </g>
+        <g id="Group_338" data-name="Group 338" transform="translate(8.181 5.645)">
+          <ellipse id="Ellipse_20" data-name="Ellipse 20" cx="2.727" cy="4.091" rx="2.727" ry="4.091" fill="#fff"/>
+          <ellipse id="Ellipse_21" data-name="Ellipse 21" cx="2.727" cy="4.091" rx="2.727" ry="4.091" transform="translate(10.908)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

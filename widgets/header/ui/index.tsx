@@ -12,13 +12,13 @@ import { RxAvatar } from "react-icons/rx";
 import clsx from "clsx";
 
 export default function Header() {
- 
+
   return (
     <header id={style["header"]}>
       <div className={style["logo"]}>
         <Menu as="div" className={style["menu"]}>
           <Menu.Button className={style["menu-button"]}>
-            <img className={style["img"]} src="/icon-256x256.png" alt="" />
+            <img className={style["img"]} src="/Logo-Timetrack.svg" alt="" />
             <p> Task Management</p>
 
             <FaChevronDown size={15} />
@@ -45,28 +45,49 @@ export default function Header() {
         <ul className={style["nav-list"]}>
           <li className={style["nav-list-item"]}>
             <Link
-              href="/home"
-              
-            >
-              <TbNotes size={25} />
+              href="/home" >
+              <TbNotes size={30} />
             </Link>
           </li>
           <li className={style["nav-list-item"]}>
             <Link href="/add-user">
-              <BsPeople size={25} />
+              <BsPeople size={30} />
             </Link>
           </li>
           <li className={style["nav-list-item"]}>
             <Link href="/map">
-              <GiWorld size={25} />
+              <GiWorld size={30} />
             </Link>
           </li>
-          <li className={style["nav-list-item"]}>
-            <Link href="#">
-              <RxAvatar size={25} />
-            </Link>
-          </li>
+
+
+
+          <div className={style["logo"]}>
+            <Menu as="div" className={style["menu"]}>
+              <Menu.Button className={style["menu-button"]}>
+                <img className={style["avatar"]} src="/Profil-avatar.svg" alt="" />
+              </Menu.Button>
+              <Menu.Items className={style["menu-items-avatar"]}>
+                <Menu.Item key="/" as={Fragment}>
+                  {({ active }) => (
+                    <Link className={style["menu-item-avatar"]} href="/timeline">
+                      Profil account
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item key="/a" as={Fragment}>
+                  {({ active }) => (
+                    <Link className={style["menu-item-avatar"]} href="/dashboard">
+                      Logout
+                    </Link>
+                  )}
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
+          </div>
+
         </ul>
+
       </nav>
     </header>
   );
