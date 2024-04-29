@@ -13,20 +13,17 @@
   .panel-container {
     position: fixed;
     z-index: 2;
-    top: 18%;
-    vertical-align: bottom;
+    top: 20%;
+    vertical-align: middle;
     margin: 0 auto;
-    right: 0%;
-    transform: translateX(0%) !important;
+    left: 50%;
+    transform: translateX(-50%) !important;
     background: var(--white);
-    //border-radius: 1rem;
-    height: 100%;
-    width: 29%;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
   }
   
   .dialog-panel {
-    //display: flex;
+    display: flex;
     justify-content: center;
   
     flex-direction: column;
@@ -35,7 +32,7 @@
   
     .dialog-title {
       font-weight: 400;
-      margin-bottom: 6rem;
+      margin-bottom: 2rem;
     }
   
     .modal-detail {
@@ -45,7 +42,7 @@
       gap: 3rem;
   
       .formik-panel {
-        //display: flex;
+        display: flex;
         gap: 1rem;
         flex-flow: row wrap;
         justify-content: space-between;
@@ -54,7 +51,7 @@
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          width: 100%;
+          width: 50vw;
           position: relative;
           height: 100%;
           flex: 1;
@@ -64,11 +61,10 @@
             padding: 1.2rem 1rem;
             border: none;
             outline: none;
-            width: 100%;
+            max-width: 79%;
             border-radius: 0.5rem;
             background: var(--input-bg);
             border: 1px solid var(--input-border);
-            height: 6rem;
   
             &::placeholder {
               color: var(--input-placeholder);
@@ -89,8 +85,9 @@
   
         .geolocation {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          margin: 3rem 5rem;
+          margin-bottom: 2rem;
   
           & > p {
             white-space: nowrap;

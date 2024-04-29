@@ -65,7 +65,7 @@ export function TaskDetailsModal({
         <div className={style["panel-container"]}>
           <Dialog.Panel as="div" className={style["dialog-panel"]}>
             <Dialog.Title className={style["dialog-title"]}>
-              Task Details{" "} 
+              Task Details{" "}
             </Dialog.Title>
 
             <div className={style["modal-detail"]}>
@@ -134,11 +134,9 @@ export function TaskDetailsModal({
                         </div>
                       </Form>
 
-
-
                       <div className={style["geolocation"]}>
                         <GiWorld size={120} />
-                        <p>On/OFF</p>
+                        <p>Turn geo location for this item</p>
                         <label htmlFor="geolocation">
                           <input
                             type="checkbox"
@@ -148,7 +146,7 @@ export function TaskDetailsModal({
                         </label>
                         <div className={style["work-time"]}>
                           <p className={style["start-time"]}>
-                            Start Date
+                            StartDate
                             <div>
                               {startDate.getHours() +
                                 `:` +
@@ -156,7 +154,7 @@ export function TaskDetailsModal({
                             </div>
                           </p>
                           <p className={style["end-time"]}>
-                            End Date
+                            EndDate
                             <div>
                               {endDate.getHours() + `:` + endDate.getMinutes()}
                             </div>

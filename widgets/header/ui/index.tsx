@@ -19,7 +19,7 @@ export default function Header() {
         <Menu as="div" className={style["menu"]}>
           <Menu.Button className={style["menu-button"]}>
             <img className={style["img"]} src="/Logo-Timetrack.svg" alt="" />
-            <p> Kanban Tasks</p>
+            <p> Task Management</p>
 
             <FaChevronDown size={15} />
           </Menu.Button>

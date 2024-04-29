@@ -1,19 +1,14 @@
 .options {
     list-style-type: none;
-    max-height: 40vh;
-    z-index: 2;
-   
-    overflow-x:hidden;
-     overflow-y:scroll;
+    max-height: 20vh;
+    overflow: scroll;
     
 }
 
 .option {
-    padding: 1.5rem 0.3rem;
+    padding: .5rem .3rem;
     border: 1px solid #ccc;
-    z-index: 2;
     border-radius: 5%;
-    margin: 0.3rem 4px;
-   
+    margin: .3rem 0;
     
 }
