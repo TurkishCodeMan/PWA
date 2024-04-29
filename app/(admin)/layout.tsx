@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
       <body cz-shortcut-listen="true">
         <QueryClientProvider client={client}>
           <SessionProvider>
-            <Pane>{children}</Pane>
+            <Pane>{children} hej</Pane>
           </SessionProvider>
         </QueryClientProvider>
         <Pwa />
