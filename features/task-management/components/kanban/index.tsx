@@ -15,7 +15,7 @@ import { useSession } from "next-auth/react";
 
 export function Kanban() {
   // SEARCH YAP DOWNSHİFT
-  const { data: session, status } = useSession();
+ // const { data: session, status } = useSession();
 
 
   const { data, isLoading } = useAllTaskGroups();
