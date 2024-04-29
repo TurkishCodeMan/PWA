@@ -9,7 +9,8 @@
   height: 7rem;
   padding: 1rem;
   background: #fff;
-  @include mixin.box-shadow();
+  border-top: 1px solid #ebebeb;
+  //@include mixin.box-shadow();
   .buttons {
     display: flex;
     justify-content: center;
@@ -68,7 +69,8 @@
     //top: 1rem;
     max-width: 10rem;
     &:nth-child(1) {
-      right: 10rem;
+      //right: 10rem;
+      right: 1rem;
     }
 
     &:nth-child(2) {
@@ -91,6 +93,7 @@
     height: 5rem;
     width: 5rem;
     overflow: hidden;
+    z-index: 100;
     button {
       width: 100%;
       top: 0;

@@ -21,6 +21,7 @@ export function ExportPublish() {
           <p> Published</p>
           <div><BoltIcon className="icon" /></div>
         </Button>
+
         <Button size="small" className={style["button"]}>
           <p> Publish</p>
           <div><BoltIcon className="icon" /></div>

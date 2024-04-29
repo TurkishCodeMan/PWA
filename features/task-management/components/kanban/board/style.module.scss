@@ -1,10 +1,11 @@
 @use "@/shared/style/mixins" as mixin;
 
 .board {
-  //background:var(--board-bg) 0% 0% no-repeat padding-box;
-  //border-radius: 0.5rem;
-  border-right: solid 1px #CFD0D4;
+  background:var(--board-bg) 0% 0% no-repeat padding-box;
   -webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
+  //border-radius: 0.5rem;
+  border-right: solid 1px #fff;
+  
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -13,11 +14,12 @@
   min-height: 50vh;
   width: 26rem;
   background-size:cover;
-   // -moz-box-shadow: inset 0px 850px 500px -500px #fff;
-    //-webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
-    //-o-box-shadow: inset 0px 850px 500px -500px #fff;
-
   
+    //-moz-box-shadow: inset 0px 850px 500px -500px #fff;
+    //-webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
+    // -o-box-shadow: inset 0px 850px 500px -500px #fff;
+
+ 
 
   &.loading {
     opacity: .5;
@@ -259,7 +261,7 @@
     background: transparent;
     min-height: 35vh;
     padding-bottom: 3rem;
-    width: 37rem;
+    width: 40rem;
     //min-height: 50vh;
     border-right: none;
 
