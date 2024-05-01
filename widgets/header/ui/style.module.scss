@@ -6,7 +6,8 @@ header#header {
   padding: 0.2rem;
   margin: 0;
   background: #fff;
-
+  position: relative;
+  z-index: 100;
   --transation-duration: 0.2s;
 
   .img {
@@ -156,8 +157,8 @@ header#header {
     //flex-direction: column;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     gap: 1rem;
-    position: sticky;
-    z-index: 1;
+    position: relative;
+    z-index: 99;
     top: 0px;
 
     .logo {

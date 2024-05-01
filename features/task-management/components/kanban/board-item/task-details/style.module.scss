@@ -11,18 +11,15 @@
     inset: 0;
   }
   .panel-container {
-    position: fixed;
-    z-index: 2;
-    top: 18%;
+    z-index: 200;
     vertical-align: bottom;
-    margin: 0 auto;
-    right: 0%;
-    transform: translateX(0%) !important;
+    margin: 0px auto;
+    transform: translateX(0%) translatey(-125%) !important;
     background: var(--white);
-    //border-radius: 1rem;
-    height: 100%;
-    width: 29%;
+    width: 82rem;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 60rem;
   }
   
   .dialog-panel {
@@ -131,7 +128,10 @@
   
     .panel-container {
       bottom: 0%;
+      
       width: 43rem;
+      transform: translateX(0%) translatey(-204%) !important;
+      height: 66rem;
     }
     .dialog-panel {
       .modal-detail {
