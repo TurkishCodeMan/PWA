@@ -30,7 +30,19 @@ header#header {
       position: relative;
       z-index: 2;
     }
-
+    .t-d-icon{ 
+      display: flex;
+      justify-content: space-between;
+      
+      background-color: var(--dark-blue);
+      border-radius: 5px;
+      height: 3rem;
+      width: 3rem;
+      font-weight: bold;
+      color: #fff;
+      font-size: 4rem;
+      padding: 5px;
+    }
 
     .menu-button {
       padding: 1rem;
@@ -157,7 +169,7 @@ header#header {
     //flex-direction: column;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     gap: 1rem;
-    position: relative;
+    position: absolute;
     z-index: 99;
     top: 0px;
 

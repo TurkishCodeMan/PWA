@@ -2,19 +2,18 @@
 
 .board {
   background:var(--board-bg) 0% 0% no-repeat padding-box;
-  -webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
-  //border-radius: 0.5rem;
-  border-right: solid 1px #fff;
-  
+  -webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;  
+  border-right: solid 1px #fff;  
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  min-height: 50vh;
-  width: 26rem;
+  min-height: 50vh;  
   background-size:cover;
-  
+
+  //width: 26rem;
+  //border-radius: 0.5rem;
     //-moz-box-shadow: inset 0px 850px 500px -500px #fff;
     //-webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
     // -o-box-shadow: inset 0px 850px 500px -500px #fff;
@@ -34,7 +33,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3rem;
-    width: 100%;
+    //width: 100%;//
 
     h2 {
       font-size: 1.4rem;
@@ -261,6 +260,8 @@
 }
 
 @media (max-width: 768px) {
+ 
+  
   .board {
     background: transparent;
     min-height: 35vh;
@@ -273,7 +274,6 @@
     -webkit-box-shadow: inset 0px 0px 0px 0px #F6F7FB !important;
     
     // @include mixin.box-shadow();
-
 
 
     

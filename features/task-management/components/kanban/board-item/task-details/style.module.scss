@@ -11,15 +11,14 @@
     inset: 0;
   }
   .panel-container {
-    z-index: 200;
-    vertical-align: bottom;
-    margin: 0px auto;
-    transform: translateX(0%) translatey(-125%) !important;
+    transform: translateX(0%) translatey(17%) !important;
     background: var(--white);
-    width: 82rem;
+    width: 43rem;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    height: 60rem;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
   }
   
   .dialog-panel {
@@ -127,11 +126,14 @@
   @media (max-width: 768px) {
   
     .panel-container {
-      bottom: 0%;
-      
+      transform: translateX(0%) translatey(17%) !important;
+      background: var(--white);
       width: 43rem;
-      transform: translateX(0%) translatey(-204%) !important;
-      height: 66rem;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      right: 0px;
+      bottom: 0px;
+      top: 0px;
     }
     .dialog-panel {
       .modal-detail {

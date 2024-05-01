@@ -4,10 +4,12 @@ import { Menu } from "@headlessui/react";
 import Link from "next/link";
 import { Fragment } from "react";
 import style from "./style.module.scss";
-import { FaChevronDown } from "react-icons/fa";
+import { FaAccessibleIcon, FaChevronDown } from "react-icons/fa";
 import { BsPeople } from "react-icons/bs";
 import { GiWorld } from "react-icons/gi";
 import { TbNotes } from "react-icons/tb";
+import { TbTimelineEvent } from "react-icons/tb";
+import { TbLayoutDashboard } from "react-icons/tb";
 import { RxAvatar } from "react-icons/rx";
 import clsx from "clsx";
 
@@ -21,20 +23,24 @@ export default function Header() {
             <img className={style["img"]} src="/Logo-Timetrack.svg" alt="" />
             <p> Kanban Tasks</p>
 
-            <FaChevronDown size={15} />
+            <FaChevronDown size={15} /> 
           </Menu.Button>
-          <Menu.Items className={style["menu-items"]}>
+          
+          <Menu.Items className={style["menu-items"]}>   
+           
             <Menu.Item key="/" as={Fragment}>
-              {({ active }) => (
+              {({ active }) => ( 
                 <Link className={style["menu-item"]} href="/timeline">
-                  Timeline
+              <span className={style["t-d-icon"]}><TbTimelineEvent size={25}/></span>      
+                <p> Timeline </p>
                 </Link>
               )}
             </Menu.Item>
             <Menu.Item key="/a" as={Fragment}>
               {({ active }) => (
                 <Link className={style["menu-item"]} href="/dashboard">
-                  Dashboard
+                    <span className={style["t-d-icon"]}><TbLayoutDashboard size={25}/></span>  
+                  <p>Dashboard</p>
                 </Link>
               )}
             </Menu.Item>
