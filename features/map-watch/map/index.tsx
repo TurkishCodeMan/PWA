@@ -41,11 +41,9 @@ export default function Map() {
 
 
   return (
-<<<<<<< HEAD
-    <MapContainer zoom={20} style={{ height: "100vh" }}>
-=======
+
     <MapContainer  zoom={20} style={{ height: "40vh" }}>
->>>>>>> c0bdcbdfc48309ba0fa9ad56effe1653e58fe03f
+
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
