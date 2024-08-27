@@ -167,7 +167,7 @@ export function TaskDetailsModal({
                       <Button intent="secondary" type="submit">
                         Submit
                       </Button>
-                      <Button onClick={() => setIsOpen(false)}>Cancel</Button>
+                      <Button intent="primary" onClick={() => setIsOpen(false)}>Cancel</Button>
                     </div>
                   </Form>
                 )}
