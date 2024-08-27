@@ -97,8 +97,8 @@ export function Board({
                         </label>
                         <p>Auto archive</p>
                       </div>
-                      <Button onClick={() => setIsOpen(true)} size="small">
-                        New Item
+                      <Button onClick={() => setIsOpen(false)} size="small">
+                       Save
                       </Button>
                     </div>
                   </div>

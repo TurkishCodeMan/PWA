@@ -8,7 +8,7 @@ import { Button } from "@/shared/components/button";
 import { Form, Formik } from "formik";
 import { Input } from "@/shared/components/input";
 import DatePicker from "react-datepicker";
-import { GiWorld } from "react-icons/gi";
+import { GiClosedBarbute, GiWorld } from "react-icons/gi";
 import { TaskGroupWithTasks, useCreateTask } from "@/entities/task/model";
 import { TaskWithUsers } from "..";
 import { AdressSearch } from "../adress-search";
@@ -65,9 +65,10 @@ export function TaskDetailsModal({
         <div className={style["panel-container"]}>
           <Dialog.Panel as="div" className={style["dialog-panel"]}>
             <Dialog.Title className={style["dialog-title"]}>
-              Task Details{" "}
+              Task Details{" "} 
             </Dialog.Title>
-
+           
+          
             <div className={style["modal-detail"]}>
               <Formik
                 initialValues={{ ...taskInitial }}
@@ -134,9 +135,11 @@ export function TaskDetailsModal({
                         </div>
                       </Form>
 
+
+
                       <div className={style["geolocation"]}>
                         <GiWorld size={120} />
-                        <p>Turn geo location for this item</p>
+                        <p>On/OFF</p>
                         <label htmlFor="geolocation">
                           <input
                             type="checkbox"
@@ -146,7 +149,7 @@ export function TaskDetailsModal({
                         </label>
                         <div className={style["work-time"]}>
                           <p className={style["start-time"]}>
-                            StartDate
+                            Start date
                             <div>
                               {startDate.getHours() +
                                 `:` +
@@ -154,7 +157,7 @@ export function TaskDetailsModal({
                             </div>
                           </p>
                           <p className={style["end-time"]}>
-                            EndDate
+                            End Date
                             <div>
                               {endDate.getHours() + `:` + endDate.getMinutes()}
                             </div>
