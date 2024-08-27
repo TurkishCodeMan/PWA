@@ -42,6 +42,7 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     return NextResponse.redirect(req.nextUrl);
   }
 
+
   //After Save Settings
   if (jwt && jwt?.role != "PUBLIC" && pathname == "/entry") {
     req.nextUrl.pathname = "/home";

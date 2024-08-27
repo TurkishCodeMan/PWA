@@ -15,12 +15,16 @@ export function ExportPublish() {
       <div className={style["bgcircles"]} >
         <div className={style["circles"]} >HA</div>
       </div>
+      <div className={style["bgcircles1"]} >
+        <div className={style["circles"]} >ED</div>
+      </div>
 
       <div className={style["buttons"]}>
         <Button size="small" disabled intent="secondary" className={style["button"]}>
           <p> Published</p>
           <div><BoltIcon className="icon" /></div>
         </Button>
+
         <Button size="small" className={style["button"]}>
           <p> Publish</p>
           <div><BoltIcon className="icon" /></div>

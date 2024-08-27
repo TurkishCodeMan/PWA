@@ -51,7 +51,6 @@ const initial: InputTypes = {
 export default function AuthForm({ mode }: AuthFormType) {
   const router = useRouter();
   const { data: session, status } = useSession();
-
   const content = mode === "login" ? loginContent : registerContent;
   const { mutateAsync: register, isLoading: isLoadingRegister } = useRegister();
   

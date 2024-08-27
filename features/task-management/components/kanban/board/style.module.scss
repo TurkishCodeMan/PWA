@@ -1,23 +1,24 @@
 @use "@/shared/style/mixins" as mixin;
 
 .board {
-  //background:var(--board-bg) 0% 0% no-repeat padding-box;
-  //border-radius: 0.5rem;
-  border-right: solid 1px #CFD0D4;
-  -webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
+  background:var(--board-bg) 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;  
+  border-right: solid 1px #fff;  
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  min-height: 50vh;
-  width: 26rem;
+  min-height: 50vh;  
   background-size:cover;
-   // -moz-box-shadow: inset 0px 850px 500px -500px #fff;
-    //-webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
-    //-o-box-shadow: inset 0px 850px 500px -500px #fff;
 
-  
+  //width: 26rem;
+  //border-radius: 0.5rem;
+    //-moz-box-shadow: inset 0px 850px 500px -500px #fff;
+    //-webkit-box-shadow: inset 0px -709px 709px -504px #F6F7FB;
+    // -o-box-shadow: inset 0px 850px 500px -500px #fff;
+
+ 
 
   &.loading {
     opacity: .5;
@@ -32,7 +33,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3rem;
-    width: 100%;
+    //width: 100%;//
 
     h2 {
       font-size: 1.4rem;
@@ -84,11 +85,13 @@
   .popover-panel {
     background: #fff;
     position: absolute;
-    width: 12rem;
-    left: 100%;
-    top: 0%;
-    padding: 1rem;
-    z-index: 2;
+    width: 17rem;
+    left: 95%;
+    top: 5%;
+    padding: 2rem;
+    z-index: 150;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 
     .popover-content {
       display: flex;
@@ -96,7 +99,7 @@
       flex-direction: column;
 
       h2 {
-        font-size: 0.8rem;
+        font-size: 1.2rem;
         font-weight: 500;
       }
       .options {
@@ -111,6 +114,8 @@
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          margin: 1px 1px 11px;
+          font-size: 15px;
         }
       }
     }
@@ -255,11 +260,13 @@
 }
 
 @media (max-width: 768px) {
+ 
+  
   .board {
     background: transparent;
     min-height: 35vh;
     padding-bottom: 3rem;
-    width: 37rem;
+    width: 40rem;
     //min-height: 50vh;
     border-right: none;
 
@@ -269,13 +276,12 @@
     // @include mixin.box-shadow();
 
 
-
     
 
     .popover-panel {
       left: unset;
-      right: 12%;
-      top: -15%;
+      right: 9%;
+      top: 4%;
     }
 
     .see-all {
