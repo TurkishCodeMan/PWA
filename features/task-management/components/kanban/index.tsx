@@ -23,6 +23,7 @@ export function Kanban() {
     useUpdateTask();
 
   const [tasksShadow, setTaskShadow] = React.useState<TaskWithUsers[]>([]);
+  const [newTasks,setNewTasks]=React.useState<any>([])
 
   async function onDragEnd(val: DropResult) {
     console.log(val);
@@ -78,12 +79,31 @@ export function Kanban() {
               direction="horizontal"
               type="column"
             >
+              
               {(provided) => (
                 <div
                   className={style["all-columns"]}
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
+                   <Board
+                      className={style['new-task-board']}
+                      key={'new-task'}
+                      id={'new-task-id'}
+                      index={0}
+                      title={'New Task'}
+                    >
+                      {[...newTasks].map((item, index) => (
+                        <BoardItem
+                          key={item.id}
+                          index={index}
+                          item={item}
+                          taskGroupId={'new-task-id'}
+                          boards={[{id:'new-task-id',name:'New Task'}]}
+                          isLoadingTaskGroup={isLoadingTaskGroup}
+                        />
+                      ))}
+                    </Board>
                   {data?.map((board, bIndex) => (
                     <Board
                       key={board.id}

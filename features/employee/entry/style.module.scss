@@ -1,0 +1,77 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    align-items:center;
+    min-height: 100vh;
+    font-family: "SUSE", sans-serif;
+    background-color: var(--main-bg);
+    --text-color:#262753;
+
+    .logo-wrapper {
+        margin-top: 5.4rem;
+    }
+    .title {
+        color: var(--text-color);
+        font-weight: bold;
+        font-size: 2.5rem;
+        margin-bottom: 4.8rem;
+        white-space: nowrap;
+        margin-top: 7rem;
+     
+    }
+
+    .description {
+        font-size: 2rem;
+        color: var(--text-color);
+        
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 1.6rem;
+    }
+
+    .entry-image {
+        // width: 36.1rem;
+        // height: 31.5rem;
+        text-align: center;
+        margin-bottom: 14rem;
+    }
+    .button-group {
+        display: flex;
+        gap: 0.37rem;
+        margin-top: auto;
+
+        & > * {
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2.8rem;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+
+        .employee-btn{
+            --color:#2474FF;
+            
+        }
+
+        .employer-btn {
+            --_color-text:#2474FF;
+        }
+    }
+
+    .demo {
+        white-space: nowrap;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        margin-top: 5rem;
+        &:first-child {
+            font-weight: 200;
+        }
+        &>:nth-child(2){
+            color: #2474FF;
+        }
+    }
+}

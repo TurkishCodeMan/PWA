@@ -17,6 +17,8 @@ interface BoardTypes {
   title: string;
   id: string;
   index: number;
+  styles?: React.CSSProperties;
+  className?: string;
 }
 
 export function Board({
@@ -24,6 +26,8 @@ export function Board({
   id,
   index,
   title = "",
+  styles,
+  className
 }: PropsWithChildren<BoardTypes>) {
   const [seeAll, setSeeAll] = React.useState(false);
   let [isOpen, setIsOpen] = React.useState(false);
@@ -62,10 +66,12 @@ export function Board({
           ref={provided.innerRef}
           {...provided.dragHandleProps}
           {...provided.draggableProps}
+        
         >
           <Popover as="div" className={style["popover"]}>
             <div
-              className={clsx(style["board"], (seeAll && style["board-open"]),(isLoading && style['loading']))}
+
+              className={clsx(style["board"], (seeAll && style["board-open"],className),(isLoading && style['loading']))}
             >
               <div className={style["board-header"]}>
                 <h2>{title}</h2>

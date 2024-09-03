@@ -17,6 +17,21 @@
  
 }
 
+.new-task-board  {
+   
+    h2 {
+      display: none;
+    }
+
+    span>div[role='button'] {
+      background: #3D7AFF !important;
+      color: #fff;
+      border-radius: .3rem;
+    }
+  
+ 
+}
+
 
 @media (max-width:768px){
  .kanban {
