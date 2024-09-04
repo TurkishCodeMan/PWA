@@ -33,3 +33,24 @@ export function useMyCompany() {
 
   return { ...result };
 }
+
+
+export function useAllCompany(){
+  const queryClient=useQueryClient()
+
+
+  const result=useQuery<any>({
+    queryKey:['all-company'],
+    queryFn:()=>{
+      return fetcher({url:'/api/company/all-company',method:'GET'}).then((data)=>data);
+    },
+    onSuccess(result){
+      return result
+    },
+    onError(err){
+      console.log(err)
+    }
+  })
+
+  return { ...result };
+}

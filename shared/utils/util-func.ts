@@ -13,7 +13,7 @@ const stripUnderscore = (s: string) => replace(s, UNDERSCORE, SPACE);
 const strip = R.pipe(stripDashes, stripUnderscore);
 
 
-export const upperFirstLetter=(s:string)=>s.split(SPACE).map(capitalize).join(SPACE);
+export const upperFirstLetter=(s:string)=>s.split(SPACE).map(capitalize).join(EMPTY);
 
 
  

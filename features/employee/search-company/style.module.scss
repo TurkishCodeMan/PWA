@@ -1,5 +1,5 @@
 .main {
-    background-color: #F6F7FB;
+    background-color: var(--main-bg);
     // margin: 2.3rem;
     padding: 2.3rem;
     min-height: 100vh;
@@ -28,11 +28,45 @@
         border-radius: 0.5rem;
         opacity: 1;
         margin-bottom: 5.6rem;
+        position: relative;
+        z-index: 999;
 
         .input {
             color: #9394A7;
             opacity: 1;
             font-size: 1.9rem;
+            width: 100%;
+            border: none;
+            border-radius: 0.5rem;
+            padding: .5rem .8rem;
+
+            &::placeholder {
+                opacity: .6;
+            
+            }
+        }
+
+        .options {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            padding: 1rem 0rem ;
+            border: none;
+            max-height: 20rem;
+            overflow-y: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            position: absolute; /* Diğer içeriğin üzerinde olacak şekilde konumlandır */
+            top: 100%; /* Butonun altına yerleştirin */
+            width: 100%;
+            background: #fff;
+            .option {
+                background: #fafafa;
+                padding: .5rem;
+                border-radius: .5rem;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
         }
     }
 
@@ -50,6 +84,12 @@
         padding-top: 4rem;
         padding-bottom: 8rem;
 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 3rem;
+        align-items: center;
+
         .company-title {
             text-align: center;
             background: #F0F0F0;
@@ -58,6 +98,22 @@
             height: 8rem;
             width: 8rem;
             margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           
+            
+            p {
+                color: #707070;
+                font-size: 2rem;
+                font-weight: bold;
+            }
+        }
+
+        p {
+            font-size: 2rem;
+            color: #707070;
+            font-weight: bold;
 
         }
 
@@ -67,5 +123,18 @@
         margin-top: auto;
         display: flex;
         font-size: 1.1rem;
+        margin-bottom: 1rem;
+
+        h2:last-child{
+            color: #2474FF;
+            margin-left: .5rem;
+        }
+
+      
+    }
+    .next-btn {
+        button {
+            font-size: 1.5rem;
+        }
     }
 }
