@@ -1,94 +1,154 @@
 .main {
-    padding: 2rem;
-    background-color: var(--main-bg);
-    height: 100vh;
+  padding: 2rem;
+  background-color: var(--main-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-    .name-card {
-        background-color: #F0F0F0;
-        border-radius: 3rem;
-        opacity: 1;
-        width: 8.4rem;
-        height: 8.3rem;
+  .name-card {
+    background-color: #f0f0f0;
+    border-radius: 3rem;
+    opacity: 1;
+    width: 8.4rem;
+    height: 8.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+
+    .short-name {
+      color: #707070;
+    }
+  }
+
+  .company-name {
+    color: #262753;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 7.7rem;
+  }
+
+  .name {
+    margin-bottom: 3rem;
+    .field {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      label {
+        opacity: 0.5;
+      }
+      .col-field {
+        position: relative;
         display: flex;
-        justify-content: center;
         align-items: center;
-        margin: auto;
-        margin-bottom: 1rem;
 
-        .short-name {
-            color: #707070;
+        input {
+          padding: 1rem;
         }
-    }
-
-    .company-name {
-        color: #262753;
-        font-size: 1.3rem;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 7.7rem;
-    }
-
-    .name {
 
         .person-icon {
-            color: #2474FF;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: flex-end;
-        }
-    }
+          color: #2474ff;
 
-    .phone {
+          position: absolute;
+          right: 0;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+  .phone {
+    .field {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      label {
+        opacity: 0.5;
+      }
+      .col-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        input {
+          padding: 1rem;
+        }
 
         .phone-icon {
-            color: #2474FF;
-            display: flex;
-            justify-content: flex-end;
+          color: #2474ff;
+
+          position: absolute;
+          right: 0;
+          margin-right: 1rem;
         }
+      }
     }
+  }
 
-    .work-as {
-        color: #707070;
-        font-size: medium;
-    }
+  .work-as {
+    color: #707070;
+    font-size: medium;
+    margin: 2rem 0;
+  }
 
-    .starters-card {
-        background-color: #F0F0F0;
+  .cards {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8rem;
+
+    .card {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      gap: 1.5rem;
+      .card-head {
+        background-color: #f0f0f0;
         width: 6rem;
         height: 5.9rem;
         display: flex;
-        justify-content: space-between;
-        float: left;
+        border-radius: 1rem;
+
+        //Hilalim bak active demiştim ya mavi olsun diye onu burada yapıyoruz
+        // bu classı ekleyince html elementten  mavi olacak
+        // clsx diye bir paket ile iki classı birden ekliyoruz.
+
+        &.active {
+          background-color: #2474ff;
+           
+          h1 {
+            color: #fff;
+          }
+        }
 
         h1 {
-            color: #262753;
-            justify-content: center;
-            display: flex;
-            align-items: center;
-            margin: auto;
-
+          color: #262753;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          margin: auto;
         }
+      }
 
-    }
-
-    .starters {
-
-
+      .card-title {
         h3 {
-            
-            color: #262753;
-            display: flex;
-            align-items: center;
-            margin: auto;
-            
+          color: #262753;
+          display: flex;
+          align-items: center;
+          margin: auto;
+          text-align: center;
         }
-
+      }
     }
+  }
 
-
-
-    .finish-button {
-        font-size: 1.5rem;
-
-    }
+  .finish-button {
+    font-size: 1.5rem;
+    margin-top: auto;
+  }
 }
