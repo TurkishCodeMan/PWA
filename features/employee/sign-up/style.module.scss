@@ -1,0 +1,94 @@
+.main {
+    padding: 2rem;
+    background-color: var(--main-bg);
+    height: 100vh;
+
+    .name-card {
+        background-color: #F0F0F0;
+        border-radius: 3rem;
+        opacity: 1;
+        width: 8.4rem;
+        height: 8.3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-bottom: 1rem;
+
+        .short-name {
+            color: #707070;
+        }
+    }
+
+    .company-name {
+        color: #262753;
+        font-size: 1.3rem;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 7.7rem;
+    }
+
+    .name {
+
+        .person-icon {
+            color: #2474FF;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .phone {
+
+        .phone-icon {
+            color: #2474FF;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .work-as {
+        color: #707070;
+        font-size: medium;
+    }
+
+    .starters-card {
+        background-color: #F0F0F0;
+        width: 6rem;
+        height: 5.9rem;
+        display: flex;
+        justify-content: space-between;
+        float: left;
+
+        h1 {
+            color: #262753;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            margin: auto;
+
+        }
+
+    }
+
+    .starters {
+
+
+        h3 {
+            
+            color: #262753;
+            display: flex;
+            align-items: center;
+            margin: auto;
+            
+        }
+
+    }
+
+
+
+    .finish-button {
+        font-size: 1.5rem;
+
+    }
+}
