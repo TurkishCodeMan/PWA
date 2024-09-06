@@ -1,0 +1,39 @@
+.main {
+    background-color: var(--main-bg);
+    height: 100vh;
+    padding: 4rem;
+
+    .logo {
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        display: flex;
+        margin-bottom: 3rem;
+    }
+
+    .welcome {
+        font-size: 1.5rem;
+        display: flex;
+        text-align: center;
+        color: #262753;
+        margin-bottom: 13rem;
+    }
+
+    .name {
+        background-color: #F0F0F0;
+        border-radius: 1rem;
+        width: 24.4rem;
+        height: 8.3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+
+        h2 {
+            font-size: 1.9rem;
+            color: #707070;
+            text-align: center;
+        }
+
+    }
+}
