@@ -66,6 +66,25 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+      <div className={style["cards"]}>
+        <div className={style["card"]}>
+          <div className={clsx(style["card-head"])}>
+            <h1>O</h1>
+          </div>
+          <div className={style["card-title"]}>
+            <h3>Outdoors</h3>
+          </div>
+        </div>
+
+        <div className={style["card"]}>
+          <div className={style["card-head"]}>
+            <h1>S</h1>
+          </div>
+          <div className={style["card-title"]}>
+            <h3>Service</h3>
+          </div>
+        </div>
+      </div>
       <div className={style["finish-button"]}>
         <Button>Finish</Button>
       </div>

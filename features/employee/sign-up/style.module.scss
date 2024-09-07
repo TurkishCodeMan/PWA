@@ -33,6 +33,7 @@
 
   .name {
     margin-bottom: 3rem;
+
     .field {
       display: flex;
       flex-direction: column;
@@ -41,6 +42,7 @@
       label {
         opacity: 0.5;
       }
+
       .col-field {
         position: relative;
         display: flex;
@@ -62,6 +64,7 @@
   }
 
   .phone {
+    margin-bottom: 2rem;
     .field {
       display: flex;
       flex-direction: column;
@@ -70,6 +73,7 @@
       label {
         opacity: 0.5;
       }
+
       .col-field {
         position: relative;
         display: flex;
@@ -93,7 +97,7 @@
   .work-as {
     color: #707070;
     font-size: medium;
-    margin: 2rem 0;
+    margin: 1.5rem ;
   }
 
   .cards {
@@ -101,12 +105,15 @@
     align-items: center;
     justify-content: start;
     gap: 8rem;
+    margin-bottom: 2rem;
 
     .card {
       justify-content: center;
       align-items: center;
       display: flex;
-      gap: 1.5rem;
+      gap: 1.3rem;
+      margin-bottom: 3.6rem;
+
       .card-head {
         background-color: #f0f0f0;
         width: 6rem;
@@ -120,7 +127,7 @@
 
         &.active {
           background-color: #2474ff;
-           
+
           h1 {
             color: #fff;
           }
