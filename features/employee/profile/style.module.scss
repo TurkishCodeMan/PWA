@@ -1,0 +1,69 @@
+.main {
+    background-color: var(--main-bg);
+    height: 100vh;
+
+    .profile-img-card {
+        width: 36.8rem;
+        height: 11.3rem;
+        background-color: #FFFFFF;
+        box-shadow: 0rem 0.3rem 0.6rem #00000029;
+        border-radius: 2rem;
+        display: flex;
+        margin: auto;
+        align-items: center;
+
+
+        .profile-img {
+            background-color: #E9EAEF;
+            width: 8rem;
+            height: 8rem;
+            border-radius: 100%;
+            flex: 1;
+            align-items: center;
+        }
+
+        .employee-name {
+            flex: 3;
+            margin-right: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            .employee-name p:first-child {
+                color: #9394A7;
+                /* Employee kelimesinin rengi */
+            }
+
+            .employee-name h3 {
+                margin-bottom: 10px;
+                /* Başlık ile p tagları arasında boşluk bırakır */
+            }
+
+            .employee-name div {
+                display: flex;
+                /* p taglarını yan yana yerleştirmek için */
+            }
+
+            p {
+                color: #262753;
+                display: inline;
+                margin-right: 5px;
+
+            }
+        }
+
+    }
+
+    .profile-info {
+        background-color: #FFFFFF;
+        height: 29.6rem;
+        width: 36.8rem;
+        border-radius: 2rem;
+        display: flex;
+        justify-content: center;
+        /* Yatay ortalama */
+        align-items: center;
+        margin-top: 4rem;
+    }
+}

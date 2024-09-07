@@ -1,12 +1,14 @@
 import EmployeeEntry from "./entry";
+import Profile from "./profile";
 import SearchCompany from "./search-company";
 import SignUp from "./sign-up";
-import welcome from "./welcome";
+import Welcome from "./welcome";
 
 
-export const Employee={
+export const Employee = {
     EmployeeEntry,
     SearchCompany,
     SignUp,
-    welcome
+    Welcome,
+    Profile
 }
