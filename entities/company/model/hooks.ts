@@ -54,3 +54,23 @@ export function useAllCompany(){
 
   return { ...result };
 }
+
+export function useCompanyId(id: string) {
+  const queryClient = useQueryClient();
+
+  const result = useQuery<CompanyWithUsers>({
+    queryKey: [`company-${id}`], // QueryKey'de companyId'yi de ekliyoruz
+    queryFn: () => {
+      return fetcher({
+        url: `/api/company/${id}`, // companyId'yi API isteğinde kullanıyoruz
+        method: "GET",
+      }).then((data) => data);
+    },
+    enabled: !!id, // companyId'nin var olduğundan emin oluyoruz
+    onSuccess(result) {
+      return result;
+    },
+  });
+
+  return { ...result };
+}

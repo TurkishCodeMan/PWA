@@ -1,13 +1,18 @@
+@import "@/shared/style/_mixins.scss";
+
 .main {
     background-color: var(--main-bg);
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
 
     .profile-list {
         justify-content: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 20rem;
+
 
 
         .profile-img-card {
@@ -20,6 +25,7 @@
             align-items: center;
             justify-content: center;
             gap: 3rem;
+            @include box-shadow-bottom;
 
             .profile-img {
                 background-color: #E9EAEF;
@@ -92,6 +98,7 @@
         // Dikeyde ortala
         margin-top: 4rem;
         gap: 3.5rem;
+        @include box-shadow-bottom;
 
         .name {
             .field {
@@ -131,6 +138,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 26rem;
 
         .sign-out {
             width: 36.8rem;
@@ -140,7 +148,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
+            
+            @include box-shadow-bottom;
+            
             h3 {
                 font-size: 1.8rem;
                 color: #262753;

@@ -70,7 +70,7 @@ export default function Profile() {
             <div className={style["sign-out-list"]}>
                 <div className={style["sign-out"]}>
                     <VscSignOut color=" #262753" size={28} />
-                    <h3>Sign outr</h3>
+                    <h3>Sign out</h3>
                 </div>
             </div>
             <div className={style["footer"]}>

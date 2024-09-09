@@ -7,13 +7,28 @@ import { Combobox } from "@headlessui/react";
 import { useAllCompany } from "@/entities/company/model";
 import { upperFirstLetter } from "@/shared/utils/util-func";
 import { IoMdArrowBack } from "react-icons/io";
+import { useRouter } from "next/navigation"; // useRouter'ı kullanıyoruz
 
 export default function SearchCompany() {
   const [companyName, setCompany] = React.useState("" as any);
   const result = useAllCompany();
+  const router = useRouter(); // useRouter'ı kullanıyoruz
+
+  const handleNext = () => {
+    if (companyName) {
+      console.log(companyName.id)
+      // Yönlendirme yaparken query değil, state üzerinden company bilgisini geçiyoruz
+      router.push(`/sign-up?company=${companyName.id}`); // Şirket ismini query string olarak gönderiyoruz
+    }
+  };
+
+  const backward=()=>{
+    router.push('/employee-entry')
+  }
+
   return (
     <div className={style["main"]}>
-      <div className={style["back-btn"]}><IoMdArrowBack size={30}/>
+      <div className={style["back-btn"]}><IoMdArrowBack onClick={backward} size={30}/>
       </div>
       <div className={style["welcome"]}>
         <h1>Welcomme to Dsumma Time Track</h1>
@@ -58,7 +73,7 @@ export default function SearchCompany() {
         <h2>Log in</h2>
       </div>
       <div className={style["next-btn"]}>
-        <Button>Next</Button>
+        <Button onClick={handleNext}>Next</Button>
       </div>
     </div>
   );

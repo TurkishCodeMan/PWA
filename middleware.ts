@@ -15,6 +15,12 @@ const verifyJWT = async (jwt: string) => {
 
   return payload;
 };
+
+function shouldRedirectPathEmployees(pathname: string): boolean {
+  const pathsToCheck = ["/", "/employee-entry", "/search-company", "/sign-up"];
+  return pathsToCheck.includes(pathname);
+}
+
 function isEmployer(jwt:JWT){
   return jwt && jwt.role==='EMPLOYER';
 }
@@ -23,7 +29,7 @@ function isEmployees(jwt:JWT){
 }
 export default async function middleware(req: NextRequest, res: NextResponse) {
   const { pathname } = req.nextUrl;
-
+  // console.log(req)
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -42,6 +48,10 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     return NextResponse.redirect(req.nextUrl);
   }
 
+  if (isEmployees(jwt as JWT) && shouldRedirectPathEmployees(pathname)) {
+    req.nextUrl.pathname = "/welcome";
+    return NextResponse.redirect(req.nextUrl);
+  }
 
   //After Save Settings
   if (jwt && jwt?.role != "PUBLIC" && pathname == "/entry") {
@@ -49,10 +59,10 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     return NextResponse.redirect(req.nextUrl);
   }
 
-  if (!jwt) {
-    req.nextUrl.pathname = "/signin";
-    return NextResponse.redirect(req.nextUrl);
-  }
+  // if (!jwt) {
+  //   req.nextUrl.pathname = "/signin";
+  //   return NextResponse.redirect(req.nextUrl);
+  // }
 
   try {
     return NextResponse.next();
