@@ -1,5 +1,6 @@
 import EmployeeEntry from "./entry";
 import HistoryPage from "./history-page";
+import HomePage from "./home-page";
 import HoursPage from "./hours-page";
 import Profile from "./profile";
 import SearchCompany from "./search-company";
@@ -14,5 +15,6 @@ export const Employee = {
     Welcome,
     Profile,
     HistoryPage,
-    HoursPage
+    HoursPage,
+    HomePage
 }
