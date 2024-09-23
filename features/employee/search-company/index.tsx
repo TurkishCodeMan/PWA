@@ -64,9 +64,9 @@ export default function SearchCompany() {
       </div>
       <div className={style["company"]}>
         <div className={style["company-title"]}>
-          <p>#{upperFirstLetter(companyName.name ?? '')}</p>
+          <p>#{upperFirstLetter(companyName?.name ?? '')}</p>
         </div>
-        <p>{companyName.name}</p>
+        <p>{companyName?.name}</p>
       </div>
       <div className={style["login"]}>
         <h2>Do you allready have an account?</h2>

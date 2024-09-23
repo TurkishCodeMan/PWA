@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import style from "./style.module.scss";
 import { FaRobot } from 'react-icons/fa';
@@ -17,6 +19,7 @@ import { HiBoltSlash } from "react-icons/hi2";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsClock } from "react-icons/bs";
 import { MdOutlineHistory } from "react-icons/md";
+import { useMe } from "@/entities/user/model";
 
 // function Example() {
 //     return (
@@ -51,6 +54,8 @@ function Desc() {
 }
 
 export default function HomePage() {
+    const {data}=useMe()
+    //Bitanem useCompanyId den id yi yolla ve şirketi de al :)
     return (
         <div className={style["main"]}>
             <div className={style["card-list"]}>

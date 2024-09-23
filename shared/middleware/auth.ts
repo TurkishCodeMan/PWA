@@ -10,6 +10,7 @@ export default async (req: any, res: any, next: any) => {
   } else {
     // Not Signed in
     res.status(401);
+    res.json({message:"Unauthorized access !!"});
     res.end();
   }
 };

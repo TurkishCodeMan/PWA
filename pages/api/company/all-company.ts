@@ -3,13 +3,14 @@ import nc from "next-connect";
 import middleware from "@/shared/middleware/all";
 import onError from "@/shared/middleware/error";
 import { Request } from "../types";
+import db from "@/shared/middleware/db";
 
 const handler = nc<Request, NextApiResponse>({
   onError,
 });
 
-handler.use(middleware);
-
+//handler.use(middleware);
+handler.use(db);
 
 //TODO SELECTED COMPANY FEATURE ADDED WİTH CONTEXT API
 handler.get(async (req, res) => {

@@ -16,7 +16,8 @@ export type UserWithCompanies = Prisma.UserGetPayload<typeof userWithCompanies>;
 
 export function useMe() {
   const { data } = useSession();
-  console.log(data, "DATA");
+
+  console.log(data, "Session");
   const queryClient = useQueryClient();
 
   const result = useQuery<UserWithCompanies>({
@@ -45,7 +46,7 @@ export function useRegister() {
       phone: string;
       taskGroup: string;
       companyId: string;
-      role:string,
+      role: string,
     }) => {
       // Register API'sine istek yap
       return fetcher({
@@ -63,7 +64,7 @@ export function useRegister() {
           password: variables.password,
         });
 
-        console.log('On Success',res)
+        console.log('On Success', res)
 
         if (res?.ok) {
           // Oturum açma başarılıysa, welcome sayfasına yönlendir

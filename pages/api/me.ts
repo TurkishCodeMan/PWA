@@ -20,7 +20,9 @@ handler.get(async (req, res) => {
       id:req.user.id
     },
     include:{
-      ownerCompanies:true
+      ownerCompanies:true,
+      tasks:true,
+      ownerTasks:true,
     }
   })
   res.status(201).json(user);
